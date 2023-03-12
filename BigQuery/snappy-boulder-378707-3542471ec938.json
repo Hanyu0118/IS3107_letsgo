@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "snappy-boulder-378707",
+  "private_key_id": "3542471ec9384c86e7c750f4a28880424ec11f82",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDyOqsUBl/STxet\nplCr9Fsg3Md5CeKkaGkMn65ID+LYCFxvRPiNLG/eiZrRgebbLhHcq1ecoGxTuEHY\nyBycndpKJtcz/YRjnbnO6Qoogq5NHtw9K7EmeTrEZSrnNHqV1BxVVhtlRNMJzrx4\ndoMgYopR3uB96U1bTqdFYpFZjyCSCAIrblPLuJmlNMuqiu9iVKKuNizQRZmn5fyN\n1tzcqq8qQxhh1FH/GeQY9jTeaC98/3LCKudZaDandPcyC0a+obxgftuML4G5TH0N\n5dsPYdmYPXY7daOOBVKokzAeDz/Ez71y0dtQmYZb6EbJlPgISa8CbOWJ2AK9I7pv\njF5P8Xu9AgMBAAECggEAF8EGxNxz1MvFI9Yi+XHpkS6axcphNkPiRVwlZai1KKqi\nket+v61jZ7yGeP7W/5h5ekfikW1ZTNkiuppef+yqRZ+gdqyTqTHZplT2a47r0+FF\nB3SmQdfH77mHZwv07Nt+TyS2Drdx8KIcRmiXfFCy2st9/VWogd3pNmXaS3Y8jfAC\nm0iUMkGkSkVGYj2fU1kGQscFZS4BQFaF5nKYgX6WqmYVHzUEL37nnEyuQqeBwIIC\nX8Y3A36VdPXBQDmmBK8xhVFhQ4Pj4c4+6BdOT5NOMOHPef98D/+wJBgBv7X2Bb2z\njkk5lBO4tdwgCAxjfvaBQyIK1VdLBK5tm3ck4d29mwKBgQD5H1Z3/BioqI9nxzDq\nGqO849P5dVaBiYEvXm5Yd44m5OQSJVEvRjIgcxhrQ9l2yfVZvjf/8IYh3/cBr/bN\nPYUXUiQb1Fk35Ate69nXQeu0RB5R0PfaFgkEY6uTLHSyHSJ5bHifQ8e6RwOzsByZ\n6PkABsLWyLU1OZJUvsQ63jGpJwKBgQD46pzhuDI2f7vc9biWkMAtBsdy/mLP0kuQ\ngDP5AKEEYLhNc+8xi9t1UJlP7VpfExYXlw4f/aKzwfQU/YGqxWkQFIoIt1wNO4wK\nsA5tvIw6r1UfIDYE0FoKXNNAW0kbAfFXfYfuTdCk1GBpvvWkAjJ839J55zfHzIYz\nBUVVPebaewKBgQC4GiCcqwDOI0NXPi031FgMz5FnWP+E20lM6ExDtJaox56Eim9k\nsEt7D5OMMagT0Uwv9hMMYYO+pPS1moSZSE2C3oEwz8zfMPf2PfXOzjiSD4UYkYWY\n9Y/UXpP9P20986n2ceLyT/TaBIEH2a5JT5I0Isr6T3kazGEHn7MEjg/FIQKBgQCy\nhrKWQaHh7KM0yxflBVSP9ri+BS2hmFaSASFFienyVdxZ0LjRdFmmPnR3GukiH3JM\n4Q5Ea4lyG72QAHIrpQLBgbmunrPq2baLQ9JValG5FV+bv2J++WBa5lCta8t3D2Gl\nOmdvx2fJkHjF3ywWwWysm2s9+1PKfSoTFciwZoFYWQKBgQDTyQNJbA3ecjXdVXP+\nZxlTD8G+SDNRPol+fSXv71prGy2zayVLxgvHQ98azRKKcSVfUIpnRYjdlWfqWrld\nVoMFugd4CV5cpdZQwfEuOR7+sexwZtGl2iC/MWwdo6hFtgzwbTlBR0F3pAvLFI5e\n3iyPpTm/POyKOsrgD9rHR62GYQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "is3107-member@snappy-boulder-378707.iam.gserviceaccount.com",
+  "client_id": "109897127011626842452",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/is3107-member%40snappy-boulder-378707.iam.gserviceaccount.com"
+}
