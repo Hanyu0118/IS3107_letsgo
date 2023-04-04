@@ -19,18 +19,18 @@ from airflow.operators.python import PythonOperator
 
 from is3107.extract_new_releases import extract_new_releases_op #Task1  checked
 from is3107.clean_new_albums import clean_new_albums_op #Task2 checked
-from is3107.load_new_albums import load_new_albums_op # Task3
+# from is3107.load_new_albums import load_new_albums_op # Task3
 from is3107.extract_new_albums_full_info import extract_new_albums_full_info_op #Task4 checked
 from is3107.extract_artist import extract_artist_op #Task5 checked
 from is3107.get_new_track_ids import get_new_track_ids_op #Task6 checked
 from is3107.extract_new_track_info import extract_new_track_info_op #Task7 checked
 from is3107.extract_audio_features import extract_audio_features_op #Task8 checked
 from is3107.clean_new_track_info import clean_new_track_info_op #Task9 checked
-from is3107.load_new_track_info import load_new_track_info_op # Task10
+# from is3107.load_new_track_info import load_new_track_info_op # Task10
 from is3107.clean_audio_features import clean_audio_features_op #Task11 checked
 from is3107.load_audio_features import load_audio_features_op #Task12
 from is3107.clean_artist import clean_artist_op #Task13 checked
-from is3107.load_artist_to_history import load_artist_to_history_op #Task14
+# from is3107.load_artist_to_history import load_artist_to_history_op #Task14
 
 
 

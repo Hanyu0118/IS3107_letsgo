@@ -6,6 +6,7 @@ def extract_new_releases_op():
     # client_id = credentials['client_id']
     # client_secret = credentials['client_secret']
     sp = connect_to_spotify_op()
-    albums = sp.new_releases()['albums']['items']
+    
+    albums = sp.new_releases(limit=50, offset=0)['albums']['items']
     extract_date_album = date.today()
     return albums, extract_date_album
