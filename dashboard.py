@@ -22,7 +22,9 @@ client = bigquery.Client(credentials=credentials)
 # Perform query.
 # Uses st.cache_data to only rerun when the query changes or after 10 min.
 # @st.cache_data(ttl=600)
-@st.experimental_memo
+# @st.experimental_memo
+@st.cache_data # it shows warning using experimental_memo
+
 def run_query(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
@@ -40,7 +42,15 @@ genre_df = pd.DataFrame(genre_rows)
 genre_df['mean_popularity'] = genre_df['popularity'] / genre_df['total_tracks']
 genres = genre_df['genre'].unique()
 
-st.title("Spotify Plus")
+feature_rows = run_query('SELECT * FROM `snappy-boulder-378707.AudioFeatures.AudioFeatures`')
+feature_df = pd.DataFrame(feature_rows)
+track_feature_df = pd.merge(feature_df, track_df, on="id", how="inner")
+track_feature_df = track_feature_df.sort_values(by=['popularity'],ascending=False)
+
+artist_rows = run_query('SELECT * FROM `snappy-boulder-378707.TrackClearInfo.ArtistInfo` ORDER BY popularity desc LIMIT 5')
+artist_df = pd.DataFrame(artist_rows)
+
+st.title("SpotifyPlus")
 
 # tabs
 tab1, tab2 = st.tabs(["Genre & Popularity Coverage", "Prediction"])
@@ -86,6 +96,27 @@ with tab1:
             
     
 
-# Tracks in terms of popularity (/danceability/energy/singer/team etc)  in a genre - scatter plot - 2
+# Tracks in terms of popularity (/danceability/energy/singer/team etc) in a genre - scatter plot - 2
+    c3 = st.container()
+    
+    with c3:
+        col1, col2 = st.columns([1,1])
+        with col1:
+            st.header("Top Tracks Teatures")
+            feature_option = st.selectbox('Choose a feature to plot', ('Popularity','Danceability', 'Energy', 'Loudness', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence','Tempo', 'Duration_ms','Available_Markets'))
+            fig, ax = plt.subplots(figsize=(15,7))
+            sns.barplot(y=track_feature_df[feature_option.lower()][:5], x=track_feature_df['name'][:5], width = 0.6)
+            ax.set_xlabel('Track',fontsize = 14)
+            ax.set_ylabel(feature_option,fontsize = 14)
+            st.pyplot(fig)
+
+        with col2:
+            st.header("Top Singers Info")
+            attribute_option = st.selectbox('Choose an attribute to plot', ('Popularity','Followers'))
+            fig, ax = plt.subplots(figsize=(15,7))
+            sns.barplot(y=artist_df[attribute_option.lower()][:5], x=artist_df['name'][:5], width= 0.6)
+            ax.set_xlabel('Singer',fontsize = 14)
+            ax.set_ylabel(attribute_option,fontsize = 14)
+            st.pyplot(fig)
 
 # Singers in terms of popularity/followers/no. of trending songs in general/genre -3
