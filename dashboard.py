@@ -1,5 +1,5 @@
 # streamlit_app.py
-
+from Prediction import pop_predict
 import streamlit as st
 from google.oauth2 import service_account
 from google.cloud import bigquery
@@ -142,3 +142,49 @@ with tab1:
             ax.set_xlabel('Track',fontsize = 14)
             ax.set_ylabel(genre_feature_option,fontsize = 14)
             st.pyplot(fig)
+
+
+
+
+# tab - prediction
+with tab2:
+    c1 = st.container()
+    c2 = st.container()
+    with c1:
+        st.title('Track Popularity Predictor')
+        col1, col, col2 = st.columns([1,2,1])
+        with col:
+            st.image("""https://pyxis.nymag.com/v1/imgs/3a3/b1f/2141226b8ab1ae07afe4b541ee0d2b0825-11-yic-pop-essay.rsocial.w1200.jpg""")
+        col1, col, col2 = st.columns([7,1,7])
+        with col1:
+            released_date = st.date_input('Released Date:',datetime.datetime.now())
+            danceability = st.number_input('Danceability:', min_value=0.0, max_value=1.0)
+            energy = st.number_input('Energy:', min_value=0.0, max_value=1.0)
+            key = st.selectbox('Key:', range(0,12))
+            loudness = st.number_input('Loudness:', min_value=-60.0, max_value=1.0)
+            mode = st.selectbox('Mode:', [0,1])
+            speechiness = st.number_input('Speechiness:', min_value=0.0, max_value=1.0)
+            acousticness = 	st.number_input('Acousticness:', min_value=0.0, max_value=1.0)
+            instrumentalness = 	st.number_input('Instrumentalness:', min_value=0.0, max_value=1.0)
+        with col2:
+            liveness = st.number_input('Liveness:', min_value=0.0, max_value=1.0)
+            valence = st.number_input('Valence:', min_value=0.0, max_value=1.0)
+            tempo = st.number_input('Tempo:', min_value=0.0, max_value=500.0)
+            duration_ms = st.number_input('Duration (ms):', min_value=0.0, max_value=1.0 * 10**10)
+            time_signature = st.selectbox('Time signature:', range(3,8))
+            explicit = 	st.selectbox('Explicit:', range(0,2))
+            available_markets = st.number_input('Available markets:', min_value=0, max_value=500)
+            followers = st.number_input('Followers:', min_value=0, max_value=1 * 10**10)
+            popularity_artist = st.number_input('Artist popularity:', min_value=0.0, max_value=100.0)
+
+        vars = [released_date,danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,duration_ms,time_signature,explicit,available_markets,followers,popularity_artist]
+        if st.button('Predict Price'):
+            popularity = pop_predict(vars)
+            st.success(f'The predicted popularity of the track is {popularity[0]:.2f}')
+            col1, col, col2 = st.columns([2,5,2])
+            with col:
+                fig, ax = plt.subplots(figsize=(15,8))
+                sns.kdeplot(data=track_feature_df, x="popularity",fill = True,alpha=0.5, color = '#4CC9F0')
+                plt.axvline(popularity[0], color = 'orange',linewidth = 6)
+                st.pyplot(fig)
+        
