@@ -34,7 +34,7 @@ def run_query(query):
 
 
 # DATA
-track_rows = run_query('SELECT * FROM `snappy-boulder-378707.TrackClearInfo.TrackClearInfo` ORDER BY popularity desc LIMIT 10')
+track_rows = run_query('SELECT * FROM `snappy-boulder-378707.TrackClearInfo.TrackClearInfo` ORDER BY popularity desc')
 track_df = pd.DataFrame(track_rows)
 
 genre_rows = run_query('SELECT * FROM `snappy-boulder-378707.GenrePopularity.GenrePopularity`')
@@ -49,6 +49,11 @@ track_feature_df = track_feature_df.sort_values(by=['popularity'],ascending=Fals
 
 artist_rows = run_query('SELECT * FROM `snappy-boulder-378707.TrackClearInfo.ArtistInfo` ORDER BY popularity desc LIMIT 5')
 artist_df = pd.DataFrame(artist_rows)
+
+track_genre_rows = run_query('SELECT * FROM `snappy-boulder-378707.TrackGenre.Trackgenre`')
+track_genre_df = pd.DataFrame(track_genre_rows)
+track_feature_genre_df = pd.merge(track_feature_df, track_genre_df, left_on="id", right_on = "track_id",how="inner")
+track_feature_genre_df = track_feature_genre_df.sort_values(by=['popularity'],ascending=False)
 
 st.title("SpotifyPlus")
 
@@ -97,6 +102,7 @@ with tab1:
     
 
 # Tracks in terms of popularity (/danceability/energy/singer/team etc) in a genre - scatter plot - 2
+# Singers in terms of popularity/followers/no. of trending songs in general/genre -3
     c3 = st.container()
     
     with c3:
@@ -119,4 +125,20 @@ with tab1:
             ax.set_ylabel(attribute_option,fontsize = 14)
             st.pyplot(fig)
 
-# Singers in terms of popularity/followers/no. of trending songs in general/genre -3
+# Top Tracks Features in Genre
+    c4 = st.container()
+    with c4:
+        st.header("Top Tracks Features in Genre")
+        col1, col2, col3 = st.columns([4,1,6])
+        with col1:
+            genre_option = st.selectbox('Choose a genre', (genre_df['genre']))
+            genre_feature_option = st.selectbox('Choose a feature', ('Popularity','Danceability', 'Energy', 'Loudness', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence','Tempo', 'Duration_ms','Available_Markets'))
+        
+        with col3:
+            fig, ax = plt.subplots(figsize=(18,7))
+            filter_by_genre = track_feature_genre_df[track_feature_genre_df[genre_option] == 1]
+            sns.barplot(y=filter_by_genre[genre_feature_option.lower()][:5], x=filter_by_genre['name'][:5].apply(lambda x: x[:40]), width = 0.6,palette="cool")
+            ax.set_title(genre_feature_option + ' of Top 5 Tracks in Genre ' + genre_option, fontsize = 20)
+            ax.set_xlabel('Track',fontsize = 14)
+            ax.set_ylabel(genre_feature_option,fontsize = 14)
+            st.pyplot(fig)
