@@ -16,6 +16,8 @@ from airflow.operators.python import PythonOperator
 # import sys 
 # sys.path.insert(1, "../is3107")
 # print(sys.path)
+import os
+path=os.getcwd()
 
 from is3107.extract_new_releases import extract_new_releases_op #Task1  checked
 from is3107.clean_new_albums import clean_new_albums_op #Task2 checked
@@ -72,7 +74,8 @@ with DAG(
     def extract_new_releases(**kwargs):
         ti = kwargs['ti']
         albums, extract_date_album = extract_new_releases_op()
-        with open('albums.json', 'w', encoding='utf-8') as f:
+        print(path)
+        with open(f'{path}/albums.json', 'w', encoding='utf-8') as f:
             json.dump(albums, f, ensure_ascii=False, indent=4)
         print("ALBUM EXTRACTED")
         ti.xcom_push('extract_date_album', str(extract_date_album))
@@ -83,20 +86,20 @@ with DAG(
         ti = kwargs['ti']
         extract_date_album = ti.xcom_pull(task_ids='extract_new_releases', key='extract_date_album')
         extract_date_album = parser.parse(extract_date_album)
-        with open('albums.json', 'r') as f:
+        with open(f'{path}/albums.json', 'r') as f:
             albums = json.load(f)
         clean_albums = clean_new_albums_op(albums, extract_date_album)
-        clean_albums.to_csv("clean_new_albums.csv", index=False)
+        clean_albums.to_csv(f'{path}/clean_new_albums.csv', index=False)
         print("ALBUM CLEANED")
     # [END clean_new_albums]
 
     # [START extract_new_albums_full_info]
     def extract_new_albums_full_info(**kwargs):
         ti = kwargs['ti']
-        with open('clean_albums.json', 'r') as f:
+        with open(f'{path}/clean_albums.json', 'r') as f:
             clean_albums = json.load(f)
         albums_full_info = extract_new_albums_full_info_op(clean_albums)
-        with open('albums_full_info.json', 'w', encoding='utf-8') as f2:
+        with open(f'{path}/albums_full_info.json', 'w', encoding='utf-8') as f2:
             json.dump(albums_full_info, f2, ensure_ascii=False, indent=4)
         print("ALBUM FULL INFO EXTRACTED")
     # [END extract_new_albums_full_info]
@@ -104,26 +107,26 @@ with DAG(
     # [START get_new_track_ids]
     def get_new_track_ids(**kwargs):
         ti = kwargs['ti']
-        with open('clean_albums.json', 'r') as f:
+        with open(f'{path}/clean_albums.json', 'r') as f:
             clean_albums = json.load(f)
         clean_albums = pd.DataFrame(clean_albums)
         clean_albums.reset_index(drop=True, inplace=True)
         clean_albums['release_date'] = clean_albums['release_date'].apply(parser.parse)
         clean_albums['extract_date'] = clean_albums['extract_date'].apply(parser.parse)
-        with open ('albums_full_info.json', 'r') as f2:
+        with open (f'{path}/albums_full_info.json', 'r') as f2:
             albums_full_info = json.load(f2)
         new_track_ids = get_new_track_ids_op(clean_albums, albums_full_info)
-        new_track_ids.to_csv('new_track_ids.csv', index=False)
+        new_track_ids.to_csv(f'{path}/new_track_ids.csv', index=False)
         print("NEW TRACK IDS GOT")
     # [END get_new_track_ids]
 
     # [START extract_new_track_info]
     def extract_new_track_info(**kwargs):
         ti = kwargs['ti']
-        new_track_ids = pd.read_csv('new_track_ids.csv')
+        new_track_ids = pd.read_csv(f'{path}/new_track_ids.csv')
         new_track_ids['artists_id'] = new_track_ids['artists_id'].apply(eval)
         new_tracks, extract_date_track = extract_new_track_info_op(new_track_ids)
-        with open('new_tracks.json', 'w', encoding='utf-8') as f:
+        with open(f'{path}/new_tracks.json', 'w', encoding='utf-8') as f:
             json.dump(new_tracks, f, ensure_ascii=False, indent=4)
         ti.xcom_push('extract_date_track', str(extract_date_track))
         print("NEW TRACK INFO EXTRACTED")
@@ -134,22 +137,22 @@ with DAG(
         ti = kwargs['ti']
         extract_date_track = ti.xcom_pull(task_ids='extract_new_track_info', key='extract_date_track')
         extract_date_track = parser.parse(extract_date_track)
-        new_track_ids = pd.read_csv('new_track_ids.csv')
+        new_track_ids = pd.read_csv(f'{path}/new_track_ids.csv')
         new_track_ids['artists_id'].apply(eval)
-        with open('new_tracks.json', 'r') as f:
+        with open(f'{path}/new_tracks.json', 'r') as f:
             new_tracks = json.load(f)
         clean_new_tracks = clean_new_track_info_op(new_tracks, new_track_ids, extract_date_track)
-        clean_new_tracks.to_csv('clean_new_tracks.csv', index=False)
+        clean_new_tracks.to_csv(f'{path}/clean_new_tracks.csv', index=False)
         print("NEW TRACK INFO CLEANED")
     # [END clean_new_track_info]
 
     # [START extract_audio_features]
     def extract_audio_features(**kwargs):
         ti = kwargs['ti']
-        new_track_ids = pd.read_csv('new_track_ids.csv')
+        new_track_ids = pd.read_csv(f'{path}/new_track_ids.csv')
         new_track_ids['artists_id'] = new_track_ids['artists_id'].apply(eval)
         audio_features = extract_audio_features_op(new_track_ids)
-        with open('audio_features.json', 'w', encoding='utf-8') as f:
+        with open(f'{path}/audio_features.json', 'w', encoding='utf-8') as f:
             json.dump(audio_features, f, ensure_ascii=False, indent=4)
         print("AUDIO FEATURES EXTRACTED")
     # [END extract_audio_features]
@@ -157,24 +160,24 @@ with DAG(
     # [START clean_audio_features]
     def clean_audio_features(**kwargs):
         ti = kwargs['ti']
-        with open('audio_features.json', 'r') as f:
+        with open(f'{path}/audio_features.json', 'r') as f:
             audio_features = json.load(f)
         clean_audio_features = clean_audio_features_op(audio_features)
-        clean_audio_features.to_csv('clean_audio_features.csv', index=False)
+        clean_audio_features.to_csv(f'{path}/clean_audio_features.csv', index=False)
         print("AUDIO FEATURES CLEANED")
     # [END clean_audio_features]
 
     # [START extract_artist]
     def extract_artist(**kwargs):
         ti = kwargs['ti']
-        with open('clean_albums.json', 'r') as f:
+        with open(f'{path}/clean_albums.json', 'r') as f:
             clean_albums = json.load(f)
         clean_albums = pd.DataFrame(clean_albums)
         clean_albums.reset_index(drop=True, inplace=True)
         clean_albums['release_date'] = clean_albums['release_date'].apply(parser.parse)
         clean_albums['extract_date'] = clean_albums['extract_date'].apply(parser.parse)
         new_artists = extract_artist_op(clean_albums)
-        with open('new_artists.json', 'w', encoding='utf-8') as f:
+        with open(f'{path}/new_artists.json', 'w', encoding='utf-8') as f:
             json.dump(new_artists, f, ensure_ascii=False, indent=4)
         print("ARTIST EXTRACTED")
     # [END extract_artist]
@@ -182,10 +185,10 @@ with DAG(
     # [START clean_artist]
     def clean_artist(**kwargs):
         ti = kwargs['ti']
-        with open('new_artists.json', 'r') as f:
+        with open(f'{path}/new_artists.json', 'r') as f:
             new_artists = json.load(f)
         clean_new_artists = clean_artist_op(new_artists)
-        clean_new_artists.to_csv('clean_new_artists.csv', index=False)
+        clean_new_artists.to_csv(f'{path}/clean_new_artists.csv', index=False)
         print("ARTIST CLEANED")
     # [END clean_artist]
 
@@ -220,7 +223,7 @@ with DAG(
         #     "duration_ms": int,
         #     "time_signature": int,
         # })
-        clean_audio_features = pd.read_csv('clean_audio_features.csv')
+        clean_audio_features = pd.read_csv(f'{path}/clean_audio_features.csv')
         load_audio_features_op(clean_audio_features)
         print("AUDIO FEATURES LOADED")
     # [END load_audio_features]
