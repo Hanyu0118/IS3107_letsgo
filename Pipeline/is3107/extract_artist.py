@@ -5,5 +5,8 @@ def extract_artist_op(clean_albums):
     artists = []
     for i in range(len(clean_albums)):
         artists += clean_albums.loc[i,'artists_id']
-        new_artists = sp.artists(artists)['artists']
+    
+    new_artists = []
+    for i in range(0, len(artists), 50):
+        new_artists += sp.artists(artists[i:i+50])['artists']
     return new_artists

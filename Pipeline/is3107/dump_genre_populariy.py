@@ -7,13 +7,13 @@ def dump_genre_popularity_op():
     client = connect_to_bigquery_op()
     
     #Get popularity table
-    table_id = "snappy-boulder-378707.TrackClearInfo.TrackClearInfo"
-    popularity= client.get_table(table_id)
+    table_id = "SELECT * FROM snappy-boulder-378707.TrackClearInfo.TrackClearInfo"
+    popularity= client.query(table_id).to_dataframe()
     popularity = popularity[["id", "popularity", "extract_date"]]
 
     #Get genre table
-    table_id = "snappy-boulder-378707.TrackGenre.Trackgenre"
-    genre= client.get_table(table_id)
+    table_id = "SELECT * FROM snappy-boulder-378707.TrackGenre.Trackgenre"
+    genre= client.query(table_id).to_dataframe()
     
     #merge two and get statistics
     genre = genre.melt(id_vars=['track_id'], var_name='genre', value_name='value')
