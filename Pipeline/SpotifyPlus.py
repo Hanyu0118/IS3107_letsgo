@@ -142,7 +142,7 @@ with DAG(
         extract_date_track = ti.xcom_pull(task_ids='extract_new_track_info', key='extract_date_track')
         extract_date_track = parser.parse(extract_date_track)
         new_track_ids = pd.read_csv('new_track_ids.csv')
-        new_track_ids['artists_id'].apply(eval)
+        new_track_ids['artists_id'] = new_track_ids['artists_id'].apply(eval)
         with open('new_tracks.json', 'r') as f:
             new_tracks = json.load(f)
         clean_new_tracks = clean_new_track_info_op(new_tracks, new_track_ids, extract_date_track)
