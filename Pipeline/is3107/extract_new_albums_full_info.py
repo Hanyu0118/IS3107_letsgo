@@ -4,8 +4,8 @@ from .connect_to_spotify import connect_to_spotify_op
 
 def extract_new_albums_full_info_op(clean_albums):
     sp = connect_to_spotify_op()
-    clean_albums = pd.DataFrame(clean_albums)
-    clean_albums['release_date'] = clean_albums['release_date'].apply(parser.parse)
-    clean_albums['extract_date'] = clean_albums['extract_date'].apply(parser.parse)
-    albums_full_info = sp.albums(clean_albums['id'].tolist())['albums']
+    ids = clean_albums['id'].tolist()
+    albums_full_info = []
+    for i in range(0, len(ids), 20):
+        albums_full_info += sp.albums(ids[i:i+20])['albums']
     return albums_full_info
