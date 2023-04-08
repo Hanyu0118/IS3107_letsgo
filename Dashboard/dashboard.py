@@ -178,13 +178,13 @@ with tab2:
             popularity_artist = st.number_input('Artist popularity:', min_value=0.0, max_value=100.0)
 
         vars = [released_date,danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,duration_ms,time_signature,explicit,available_markets,followers,popularity_artist]
-        if st.button('Predict Price'):
+        if st.button('Predict Popularity'):
             popularity = pop_predict(vars)
-            st.success(f'The predicted popularity of the track is {popularity[0]:.2f}')
+            st.success(f'The predicted popularity of the track is {popularity[0] * 100:.2f}')
             col1, col, col2 = st.columns([2,5,2])
             with col:
                 fig, ax = plt.subplots(figsize=(15,8))
                 sns.kdeplot(data=track_feature_df, x="popularity",fill = True,alpha=0.5, color = '#4CC9F0')
-                plt.axvline(popularity[0], color = 'orange',linewidth = 6)
+                plt.axvline(popularity[0]*100, color = 'orange',linewidth = 6)
                 st.pyplot(fig)
         
