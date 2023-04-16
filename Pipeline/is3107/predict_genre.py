@@ -11,7 +11,7 @@ def predict_genre_op():
     client = connect_to_bigquery_op()
     
     #Load model
-    gb = pickle.load(open('../../Model/gb_0.4343.sav','rb'))
+    gb = pickle.load(open('../../Model/Genre Prediction Model.sav','rb'))
 
     #Load genre table
     table = 'SELECT distinct * FROM snappy-boulder-378707.NewReleases.NewAudioFeatures'
@@ -22,7 +22,7 @@ def predict_genre_op():
     genre.drop(['energy', 'loudness'],axis=1, inplace=True)
     
     #Filled in missing features
-    features = pd.read_csv(f"{path}/Genre_classification_features.csv")
+    features = pd.read_csv(f"../../Model/Genre_classification_features.csv")
     for col in set(features.iloc[:,0].values) - set(genre.iloc[:,1:].columns):
         genre[col] = 0
     
