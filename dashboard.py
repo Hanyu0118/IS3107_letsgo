@@ -72,32 +72,24 @@ color_palette = sns.color_palette("Paired").pop(2)
 
 # page config
 
-# st.image(spotify_logo, width = 150)
+st.title("SpotifyPlus")
 
-# st.title("SpotifyPlus")
-
-title, logo, blank = st.columns([1.5, 1, 7])
-with title:
-    st.title("SpotifyPlus")
-with logo:
-    st.image(spotify_logo, width = 150)
-
-
+st.sidebar.image(spotify_logo, width = 150)
 
 # pre-defined functions
 
 def plot_config(fig, ax):
     fig.patch.set_alpha(0)
     ax.patch.set_alpha(0)
-    ax.spines['bottom'].set_color('#596b58')
-    ax.spines['top'].set_color('#596b58')
-    ax.spines['left'].set_color('#596b58')
-    ax.spines['right'].set_color('#596b58')
-    ax.xaxis.label.set_color('#596b58')
-    ax.yaxis.label.set_color('#596b58')
-    ax.title.set_color('#596b58')
-    ax.tick_params(axis='x', colors='#596b58')
-    ax.tick_params(axis='y', colors='#596b58')
+    ax.spines['bottom'].set_color('white')
+    ax.spines['top'].set_color('white')
+    ax.spines['left'].set_color('white')
+    ax.spines['right'].set_color('white')
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
+    ax.title.set_color('white')
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
     return fig, ax
 
 
@@ -106,13 +98,13 @@ def plot_config(fig, ax):
 
 # main content
 
-
-# tabs
-tab1, tab2 = st.tabs(["Genre & Popularity Coverage", "Prediction"])
+page = st.sidebar.radio(
+    "Select your interested page",
+    ('Genre & Popularity Coverage', 'Newly Released Prediction', 'User Prediction'))
 
 
 # tab - visualisation
-with tab1:
+if page == 'Genre & Popularity Coverage':
     
     c1 = st.container()
     
@@ -205,7 +197,7 @@ with tab1:
 
 
 # tab - prediction
-with tab2:
+if page == 'Newly Released Prediction':
     c1 = st.container()
     c2 = st.container()
     with c1:
@@ -246,4 +238,8 @@ with tab2:
                 plt.axvline(popularity[0]*100, color = 'orange',linewidth = 6)
                 fig, ax = plot_config(fig, ax)
                 st.pyplot(fig)
-        
+                
+
+
+if page == 'User Prediction':
+        st.write("hi")
