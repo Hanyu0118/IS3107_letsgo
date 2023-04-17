@@ -4,18 +4,18 @@ def dump_album_op():
    client = connect_to_bigquery_op()
    
    #Check current rows
-   table_id = "snappy-boulder-378707.TrackClearInfo.AlbumInfo"
+   table_id = "snappy-boulder-378707.History.Albums"
    table = client.get_table(table_id)
    original_rows = table.num_rows
    print("Total rows in album info table: ", original_rows)
    
    #Delete duplicates in history
    delete_duplicates = client.query("""
-        DELETE FROM snappy-boulder-378707.TrackClearInfo.AlbumInfo
+        DELETE FROM snappy-boulder-378707.History.Albums
         WHERE id IN (
             SELECT t1.id
             FROM snappy-boulder-378707.NewReleases.NewAlbums t1
-            INNER JOIN snappy-boulder-378707.TrackClearInfo.AlbumInfo t2
+            INNER JOIN snappy-boulder-378707.History.Albums t2
             ON t1.id = t2.id
         )
     """)
@@ -27,7 +27,7 @@ def dump_album_op():
 
    #Dump album info
    dump_album = client.query("""
-      INSERT INTO snappy-boulder-378707.TrackClearInfo.AlbumInfo 
+      INSERT INTO snappy-boulder-378707.History.Albums
       SELECT id,name,total_tracks,release_date,extract_date, available_markets 
       FROM snappy-boulder-378707.NewReleases.NewAlbums
    """)
@@ -44,4 +44,3 @@ def dump_album_op():
    #     TRUNCATE TABLE snappy-boulder-378707.NewReleases.NewAlbums
    # """)
    # delete_records_in_table.result()
-   print("Check whether all albums dumped: ", (rows-original_rows) == rows_newly)
