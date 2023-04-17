@@ -44,26 +44,32 @@ st.markdown(hide_default_format, unsafe_allow_html=True)
 
 
 # DATA
-track_rows = run_query('SELECT * FROM `snappy-boulder-378707.TrackClearInfo.TrackClearInfo` ORDER BY popularity desc')
+track_rows = run_query('SELECT * FROM `snappy-boulder-378707.History.Tracks` ORDER BY popularity desc')
 track_df = pd.DataFrame(track_rows)
 
-genre_rows = run_query('SELECT * FROM `snappy-boulder-378707.GenrePopularity.GenrePopularity`')
-genre_df = pd.DataFrame(genre_rows)
-genre_df['mean_popularity'] = genre_df['popularity'] / genre_df['total_tracks']
-genres = genre_df['genre'].unique()
+# genre_rows = run_query('SELECT * FROM `snappy-boulder-378707.GenrePopularity.GenrePopularity`')
+# genre_df = pd.DataFrame(genre_rows)
+# genre_df['mean_popularity'] = genre_df['popularity'] / genre_df['total_tracks']
+# genres = genre_df['genre'].unique()
 
-feature_rows = run_query('SELECT * FROM `snappy-boulder-378707.AudioFeatures.AudioFeatures`')
+feature_rows = run_query('SELECT * FROM `snappy-boulder-378707.History.AudioFeatures`')
 feature_df = pd.DataFrame(feature_rows)
 track_feature_df = pd.merge(feature_df, track_df, on="id", how="inner")
 track_feature_df = track_feature_df.sort_values(by=['popularity'],ascending=False)
 
-artist_rows = run_query('SELECT * FROM `snappy-boulder-378707.TrackClearInfo.ArtistInfo` ORDER BY popularity desc LIMIT 5')
+artist_rows = run_query('SELECT * FROM `snappy-boulder-378707.History.Artists` ORDER BY popularity desc LIMIT 5')
 artist_df = pd.DataFrame(artist_rows)
 
-track_genre_rows = run_query('SELECT * FROM `snappy-boulder-378707.TrackGenre.Trackgenre`')
+track_genre_rows = run_query('SELECT * FROM `snappy-boulder-378707.History.TrackGenre`')
 track_genre_df = pd.DataFrame(track_genre_rows)
 track_feature_genre_df = pd.merge(track_feature_df, track_genre_df, left_on="id", right_on = "track_id",how="inner")
 track_feature_genre_df = track_feature_genre_df.sort_values(by=['popularity'],ascending=False)
+
+
+genres = list(track_genre_df.columns)[1:]
+genres.sort()
+
+features = list(feature_df.columns)
 
 spotify_logo = Image.open("D:/y3s2/IS3107_letsgo/spotify_logo.png")
 
@@ -93,43 +99,58 @@ def plot_config(fig, ax):
     return fig, ax
 
 
-
-
-
 # main content
 
 page = st.sidebar.radio(
     "Select your interested page",
     ('Genre & Popularity Coverage', 'Newly Released Prediction', 'User Prediction'))
 
+st.markdown('''
+            <style>
+            .st-c7 {
+                flex-shrink: 0;
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+            }
+            </style>
+            ''', unsafe_allow_html=True)
+
+col1, col, col2 = st.columns([1,2,1])
+with col:
+    placeholder = st.image("""https://pyxis.nymag.com/v1/imgs/3a3/b1f/2141226b8ab1ae07afe4b541ee0d2b0825-11-yic-pop-essay.rsocial.w1200.jpg""")
 
 # tab - visualisation
+# if page1 == True:
 if page == 'Genre & Popularity Coverage':
+    placeholder.empty()
     
-    c1 = st.container()
+    # c1 = st.container()
     
-    with c1:
-        col1, col2 = st.columns([6,3.5])
-        with col1:
-            st.header("Genre Distribution")
-            fig, ax = plt.subplots(figsize=(10,4))
-            sns.barplot(y=genre_df['genre'], x=genre_df['total_tracks'], ax=ax, palette="Set2", errorbar=None)
-            fig, ax = plot_config(fig, ax)
-            st.pyplot(fig)
-        with col2:
-            st.header("Popularity of Genres")
-            fig, ax = plt.subplots(figsize=(30,2))
-            # pop_sum = sum(genre_df['mean_popularity'])
-            # genre_df['pop_percent'] = genre_df['mean_popularity'] / pop_sum
-            # genre_df['label'] = genre_df.apply((lambda x: x['genre'] + ' ' + str(round(x['pop_percent']*100, 2)) + '%'), axis=1)
-            patches, l_text, p_text= plt.pie(genre_df['mean_popularity'], labels = genre_df['genre'], labeldistance=1.05, autopct='%1.1f%%')
-            for t in l_text:
-                t.set_size(3.5)
-            for p in p_text:
-                p.set_size(3)
-            fig, ax = plot_config(fig, ax)
-            plt.tight_layout()
-            st.pyplot(plt)
+    # with c1:
+    #     col1, col2 = st.columns([6,3.5])
+    #     with col1:
+    #         st.header("Genre Distribution")
+    #         fig, ax = plt.subplots(figsize=(10,4))
+    #         sns.barplot(y=genre_df['genre'], x=genre_df['total_tracks'], ax=ax, palette="Set2", errorbar=None)
+    #         fig, ax = plot_config(fig, ax)
+    #         st.pyplot(fig)
+    #     with col2:
+    #         st.header("Popularity of Genres")
+    #         fig, ax = plt.subplots(figsize=(30,2))
+    #         # pop_sum = sum(genre_df['mean_popularity'])
+    #         # genre_df['pop_percent'] = genre_df['mean_popularity'] / pop_sum
+    #         # genre_df['label'] = genre_df.apply((lambda x: x['genre'] + ' ' + str(round(x['pop_percent']*100, 2)) + '%'), axis=1)
+    #         patches, l_text, p_text= plt.pie(genre_df['mean_popularity'], labels = genre_df['genre'], labeldistance=1.05, autopct='%1.1f%%')
+    #         for t in l_text:
+    #             t.set_size(3.5)
+    #         for p in p_text:
+    #             p.set_size(3)
+    #         fig, ax = plot_config(fig, ax)
+    #         plt.tight_layout()
+    #         st.pyplot(plt)
     
     c2 = st.container()
     
@@ -180,7 +201,7 @@ if page == 'Genre & Popularity Coverage':
         st.header("Top Tracks Features in Genre")
         col1, col2, col3 = st.columns([4,1,6])
         with col1:
-            genre_option = st.selectbox('Choose a genre', (genre_df['genre']))
+            genre_option = st.selectbox('Choose a genre', genres)
             genre_feature_option = st.selectbox('Choose a feature', ('Popularity','Danceability', 'Energy', 'Loudness', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence','Tempo', 'Duration_ms','Available_Markets'))
         
         with col3:
@@ -198,13 +219,42 @@ if page == 'Genre & Popularity Coverage':
 
 # tab - prediction
 if page == 'Newly Released Prediction':
+# if page2 == True:
+    st.write("hi")
+                
+
+if page == 'User Prediction':
+# if page3 == True:
+    placeholder.empty()
     c1 = st.container()
     c2 = st.container()
     with c1:
         st.title('Track Popularity Predictor')
-        col1, col, col2 = st.columns([1,2,1])
-        with col:
-            st.image("""https://pyxis.nymag.com/v1/imgs/3a3/b1f/2141226b8ab1ae07afe4b541ee0d2b0825-11-yic-pop-essay.rsocial.w1200.jpg""")
+        # visual
+        col1, col2, col3 = st.columns([3, 1, 7])
+        with col1:
+            # filters - genre
+            chosen_genre = st.selectbox('Choose a genre to plot', genres)
+            # filters - feature
+            chosen_feature = st.selectbox("choose a feature to plot", features)
+            # filter - plot type
+            chosen_plot = st.selectbox("choose a plot type", ["histogram", "boxplot"])
+        with col3:
+            target_df = track_feature_genre_df[track_feature_genre_df[[chosen_genre]] == 1]
+            fig, ax = plt.subplots(figsize=(18,7))
+            if chosen_plot == "boxplot":
+                st.write("hi")
+                sns.boxplot(target_df[chosen_feature], palette="Set2")
+            else:
+                sns.histplot(target_df[chosen_feature])
+            fig, ax = plot_config(fig, ax)
+            st.pyplot(fig)
+                
+        
+        
+        # col1, col, col2 = st.columns([1,2,1])
+        # with col:
+        #     st.image("""https://pyxis.nymag.com/v1/imgs/3a3/b1f/2141226b8ab1ae07afe4b541ee0d2b0825-11-yic-pop-essay.rsocial.w1200.jpg""")
         col1, col, col2 = st.columns([7,1,7])
         with col1:
             released_date = st.date_input('Released Date:',datetime.datetime.now())
@@ -238,8 +288,11 @@ if page == 'Newly Released Prediction':
                 plt.axvline(popularity[0]*100, color = 'orange',linewidth = 6)
                 fig, ax = plot_config(fig, ax)
                 st.pyplot(fig)
-                
 
-
-if page == 'User Prediction':
-        st.write("hi")
+# st.markdown('''
+#             <style>
+#             .st-bm .st-b3 .st-bn .st-bk .st-ar .st-bo .st-as .st-bp .st-bq .st-br .st-au .st-av .st-ax .st-aw:hover {
+#                 background-color: #2196F3;
+#             }
+#             </style>
+#             ''', unsafe_allow_html=True)
