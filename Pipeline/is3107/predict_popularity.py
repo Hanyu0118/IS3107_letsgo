@@ -1,19 +1,15 @@
-from .connect_to_bigquery import connect_to_bigquery_op
-import pickle
+from is3107.connect_to_bigquery import connect_to_bigquery_op
 import pandas as pd
 import os
 import joblib
 import datetime as dt
 from google.cloud import bigquery
-from .config_schema_popularity_prediction import config_schema_popularity_prediction_op
+from is3107.config_schema_popularity_prediction import config_schema_popularity_prediction_op
 path=os.getcwd()
 
-def predict_genre_op():
+def predict_popularity_op():
     client = connect_to_bigquery_op()
     
-    #Load model
-    gb = pickle.load(open('../../Model/Genre Prediction Model.sav','rb'))
-
     #Load genre table
     table = '''SELECT distinct s1.id,
                 s1.explicit,
@@ -38,10 +34,10 @@ def predict_genre_op():
                 inner join `snappy-boulder-378707.NewReleases.NewAlbums` as s3
                 on s1.album_id = s3.id
             '''
-    popularity = client.query(table).to_geodataframe()
+    popularity = client.query(table).to_dataframe()
 
-    table = '''SELECT distinct id, followers, popularity FROM `snappy-boulder-378707.TrackClearInfo.ArtistInfo`'''
-    artist = client.query(table).to_geodataframe()
+    table = '''SELECT distinct id, followers, popularity FROM `snappy-boulder-378707.History.Artists`'''
+    artist = client.query(table).to_dataframe()
 
     popularity = popularity.assign(artist_id=popularity.artist_id.str.split(";")).explode('artist_id')
     popularity = pd.merge(popularity, artist, left_on="artist_id",right_on="id", how="left")
@@ -59,25 +55,26 @@ def predict_genre_op():
     popularity.drop(['id_track'],axis=1, inplace=True)
 
     ##Transform
-    ct = joblib.load("../../Model/Popularity Prediction Data Preprocess.joblib")
+    ct = joblib.load(f'{path}/airflow/dags/Model/Popularity Prediction Data Preprocess.joblib')
     popularity = ct.transform(popularity)
 
 
     #predict
-    lgbm = joblib.load(open('../../Model/Popularity Prediction Model.sav','rb'))
-    pred_popularity = gb.predict(popularity)
+    lgbm = joblib.load(open(f'{path}/airflow/dags/Model/Popularity Prediction Model.sav','rb'))
+    pred_popularity = lgbm.predict(popularity)
     prediction['Popularity'] = pred_popularity
     prediction.columns = ['id','Popularity']
+    prediction['Popularity'] = prediction['Popularity'].astype(int)
     
     #delete previous one
     delete = client.query("""
-        TRUNCATE TABLE snappy-boulder-378707.Prediction.Popularity
+        TRUNCATE TABLE snappy-boulder-378707.NewReleases.PopularityPrediction
     """)
     delete.result()
 
     #Insert new one
-    table_id = 'snappy-boulder-378707.Prediction.Popularity'
+    table_id = 'snappy-boulder-378707.NewReleases.PopularityPrediction'
     schema, job_config = config_schema_popularity_prediction_op()
-    job = client.load_table_from_dataframe(prediction,table_id, schema = schema, job_config=job_config)
+    job = client.load_table_from_dataframe(prediction,table_id, job_config=job_config)
     job.result()
     print(f'{client.get_table(table_id).num_rows} is loaded into genre prediction')
