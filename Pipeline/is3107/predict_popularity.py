@@ -50,8 +50,7 @@ def predict_popularity_op():
        'energy', 'key', 'loudness', 'mode', 'speechiness', 'acousticness',
        'instrumentalness', 'liveness', 'valence', 'tempo', 'duration_ms',
        'time_signature', 'release_date'], as_index=False).aggregate({'followers':'mean','popularity_artist':'mean'})
-    popularity['release_date']=popularity['release_date'].map(dt.datetime.toordinal)
-    popularity['release_date']=popularity['release_date'].map(lambda x: dt.datetime.now().toordinal() - x)
+    popularity['release_date']=100
     prediction = popularity[['id_track']]
     popularity.drop(['id_track'],axis=1, inplace=True)
 
