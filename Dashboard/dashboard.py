@@ -1,4 +1,5 @@
 # streamlit_app.py
+from pandas.core.arrays.integer import Int64Dtype
 from Prediction import pop_predict
 import streamlit as st
 from google.oauth2 import service_account
@@ -51,13 +52,15 @@ track_df = pd.DataFrame(track_rows)
 # genre_df = pd.DataFrame(genre_rows)
 # genre_df['mean_popularity'] = genre_df['popularity'] / genre_df['total_tracks']
 # genres = genre_df['genre'].unique()
-
+# genres = run_query("SELECT column_name FROM `snappy-boulder-378707.History.INFORMATION_SCHEMA.COLUMNS` WHERE table_name = '{}'".format('TrackGenre'))[1:]
+feature_pop = run_query("SELECT * FROM `snappy-boulder-378707.History.AudioFeatures` as a join `snappy-boulder-378707.History.Tracks` as b on a.id = b.id join `snappy-boulder-378707.History.TrackGenre` as c on b.id = c.track_id ORDER BY popularity desc")
+feature_pop_df = pd.DataFrame(feature_pop)
 feature_rows = run_query('SELECT * FROM `snappy-boulder-378707.History.AudioFeatures`')
 feature_df = pd.DataFrame(feature_rows)
 track_feature_df = pd.merge(feature_df, track_df, on="id", how="inner")
 track_feature_df = track_feature_df.sort_values(by=['popularity'],ascending=False)
 
-artist_rows = run_query('SELECT * FROM `snappy-boulder-378707.History.Artists` ORDER BY popularity desc LIMIT 5')
+artist_rows = run_query('SELECT * FROM `snappy-boulder-378707.History.Artists` ORDER BY popularity desc')
 artist_df = pd.DataFrame(artist_rows)
 
 track_genre_rows = run_query('SELECT * FROM `snappy-boulder-378707.History.TrackGenre`')
@@ -67,11 +70,12 @@ track_feature_genre_df = track_feature_genre_df.sort_values(by=['popularity'],as
 
 
 genres = list(track_genre_df.columns)[1:]
-genres.sort()
+
 
 features = list(feature_df.columns)
 
-spotify_logo = Image.open("D:/y3s2/IS3107_letsgo/spotify_logo.png")
+# spotify_logo = Image.open("D:/y3s2/IS3107_letsgo/spotify_logo.png")
+spotify_logo = Image.open("../spotify_logo.png")
 
 color_palette = sns.color_palette("Paired").pop(2)
 
@@ -87,15 +91,15 @@ st.sidebar.image(spotify_logo, width = 150)
 def plot_config(fig, ax):
     fig.patch.set_alpha(0)
     ax.patch.set_alpha(0)
-    ax.spines['bottom'].set_color('white')
-    ax.spines['top'].set_color('white')
-    ax.spines['left'].set_color('white')
-    ax.spines['right'].set_color('white')
-    ax.xaxis.label.set_color('white')
-    ax.yaxis.label.set_color('white')
+    ax.spines['bottom'].set_color('black')
+    ax.spines['top'].set_color('black')
+    ax.spines['left'].set_color('black')
+    ax.spines['right'].set_color('black')
+    ax.xaxis.label.set_color('black')
+    ax.yaxis.label.set_color('black')
     ax.title.set_color('white')
-    ax.tick_params(axis='x', colors='white')
-    ax.tick_params(axis='y', colors='white')
+    ax.tick_params(axis='x', colors='black')
+    ax.tick_params(axis='y', colors='black')
     return fig, ax
 
 
@@ -155,17 +159,20 @@ if page == 'Genre & Popularity Coverage':
     c2 = st.container()
     
     with c2:
-        st.header("Popularity Distribution")
+        st.header("1. Feature Analysis")
         col1, col2, col3, col4 = st.columns([1,4,1,4])
         with col1:
             st.subheader("Filter:")
         with col2:
+            # genre_chosen = genres
             genre_chosen = st.multiselect("Choose genre types",genres)
-        with col3:
-            time_chosen = st.date_input("Release time", datetime.datetime.now())
+        # with col3:
+        #     time_chosen = st.date_input("Release time", datetime.datetime.now())
         with col4:
             pop_threshold = st.slider("maximum poplarity", 0, 100, 100)
-            
+            # st.header("Top Tracks Features")
+
+           
             
     
 
@@ -174,45 +181,54 @@ if page == 'Genre & Popularity Coverage':
     c3 = st.container()
     
     with c3:
-        col1, col2 = st.columns([1,1])
-        with col1:
-            st.header("Top Tracks Teatures")
-            feature_option = st.selectbox('Choose a feature to plot', ('Popularity','Danceability', 'Energy', 'Loudness', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence','Tempo', 'Duration_ms','Available_Markets'))
-            fig, ax = plt.subplots(figsize=(15,7))
-            sns.barplot(y=track_feature_df[feature_option.lower()][:5], x=track_feature_df['name'][:5], width = 0.6, palette="Set2")
-            ax.set_xlabel('Track',fontsize = 14)
-            ax.set_ylabel(feature_option,fontsize = 14)
-            fig, ax = plot_config(fig, ax)
-            st.pyplot(fig)
+        # col1 = st.columns([1])
+        # with col1:
+        feature_option = st.selectbox('Choose a feature to plot', ('Popularity','Danceability', 'Energy', 'Loudness', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence','Tempo', 'Duration_ms','Available_Markets'))
+        if not genre_chosen:
+            genre_chosen = genres
+        pop_filtered = feature_pop_df[feature_pop_df['popularity'] <= pop_threshold]
+        pop_filtered['sum'] = pop_filtered[genre_chosen].sum(axis = 1)
+        filtered = pop_filtered[pop_filtered['sum'] >=1][0:5]
+        fig, ax = plt.subplots(figsize=(15,7))
 
-        with col2:
-            st.header("Top Singers Info")
-            attribute_option = st.selectbox('Choose an attribute to plot', ('Popularity','Followers'))
-            fig, ax = plt.subplots(figsize=(15,7))
+        sns.barplot(y=filtered[feature_option.lower()][0:5], x=filtered['name'][0:5], width = 0.6, palette="Set2")
+        ax.set_xlabel('Track',fontsize = 14)
+        ax.set_ylabel(feature_option,fontsize = 14)
+        fig, ax = plot_config(fig, ax)
+        st.pyplot(fig)
+
+    c4 = st.container()
+    with c4:
+        st.header("2. Top Singers Analysis")
+        artist_pop_threshold = st.slider("maximum artist poplarity", 0, 100, 100)
+        attribute_option = st.selectbox('Choose an attribute to plot', ('Popularity','Followers'))
+        fig, ax = plt.subplots(figsize=(15,7))
+        artist_df = artist_df[artist_df['popularity'] <= artist_pop_threshold]
+        if len(artist_df) > 0: 
             sns.barplot(y=artist_df[attribute_option.lower()][:5], x=artist_df['name'][:5], width= 0.6, palette="Set2")
             ax.set_xlabel('Singer',fontsize = 14)
             ax.set_ylabel(attribute_option,fontsize = 14)
             fig, ax = plot_config(fig, ax)
             st.pyplot(fig)
 
-# Top Tracks Features in Genre
-    c4 = st.container()
-    with c4:
-        st.header("Top Tracks Features in Genre")
-        col1, col2, col3 = st.columns([4,1,6])
-        with col1:
-            genre_option = st.selectbox('Choose a genre', genres)
-            genre_feature_option = st.selectbox('Choose a feature', ('Popularity','Danceability', 'Energy', 'Loudness', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence','Tempo', 'Duration_ms','Available_Markets'))
+# # Top Tracks Features in Genre
+#     c4 = st.container()
+#     with c4:
+#         st.header("Top Tracks Features in Genre")
+#         col1, col2, col3 = st.columns([4,1,6])
+#         with col1:
+#             genre_option = st.selectbox('Choose a genre', genres)
+#             genre_feature_option = st.selectbox('Choose a feature', ('Popularity','Danceability', 'Energy', 'Loudness', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence','Tempo', 'Duration_ms','Available_Markets'))
         
-        with col3:
-            fig, ax = plt.subplots(figsize=(18,7))
-            filter_by_genre = track_feature_genre_df[track_feature_genre_df[genre_option] == 1]
-            sns.barplot(y=filter_by_genre[genre_feature_option.lower()][:5], x=filter_by_genre['name'][:5].apply(lambda x: x[:40]), width = 0.6,palette="Set2")
-            ax.set_title(genre_feature_option + ' of Top 5 Tracks in Genre ' + genre_option, fontsize = 20)
-            ax.set_xlabel('Track',fontsize = 14)
-            ax.set_ylabel(genre_feature_option,fontsize = 14)
-            fig, ax = plot_config(fig, ax)
-            st.pyplot(fig)
+#         with col3:
+#             fig, ax = plt.subplots(figsize=(18,7))
+#             filter_by_genre = track_feature_genre_df[track_feature_genre_df[genre_option] == 1]
+#             sns.barplot(y=filter_by_genre[genre_feature_option.lower()][:5], x=filter_by_genre['name'][:5].apply(lambda x: x[:40]), width = 0.6,palette="Set2")
+#             ax.set_title(genre_feature_option + ' of Top 5 Tracks in Genre ' + genre_option, fontsize = 20)
+#             ax.set_xlabel('Track',fontsize = 14)
+#             ax.set_ylabel(genre_feature_option,fontsize = 14)
+#             fig, ax = plot_config(fig, ax)
+#             st.pyplot(fig)
 
 
 
@@ -285,7 +301,7 @@ if page == 'User Prediction':
             with col:
                 fig, ax = plt.subplots(figsize=(15,8))
                 sns.kdeplot(data=track_feature_df, x="popularity",fill = True,alpha=0.5, color = '#4CC9F0')
-                plt.axvline(popularity[0]*100, color = 'orange',linewidth = 6)
+                plt.axvline(popularity[0], color = 'orange',linewidth = 6)
                 fig, ax = plot_config(fig, ax)
                 st.pyplot(fig)
 

@@ -12,7 +12,7 @@ def pop_predict(vars):
     vars_df['release_date']=vars_df['release_date'].map(dt.datetime.toordinal)
     vars_df[['key','mode','time_signature','explicit']] = vars_df[['key','mode','time_signature','explicit']].astype('Int64')  
     print(vars_df.dtypes)
-    pop_prepro_from_joblib = joblib.load('Popularity Prediction Data preprocess.sav')
+    pop_prepro_from_joblib = joblib.load('Popularity Prediction Data Preprocess.joblib')
     pop_from_joblib = joblib.load('Popularity Prediction Model.sav')
     processed_vars_df = pd.DataFrame(pop_prepro_from_joblib.transform(vars_df))
     return pop_from_joblib.predict(processed_vars_df)
