@@ -2322,35 +2322,116 @@
     },
     {
         "external_urls": {
-            "spotify": "https://open.spotify.com/artist/5xq3BK55BJmutN0X7eTyQB"
+            "spotify": "https://open.spotify.com/artist/4oLeXFyACqeem2VImYeBFe"
         },
         "followers": {
             "href": null,
-            "total": 414185
+            "total": 679759
         },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/5xq3BK55BJmutN0X7eTyQB",
-        "id": "5xq3BK55BJmutN0X7eTyQB",
+        "genres": [
+            "edm",
+            "house"
+        ],
+        "href": "https://api.spotify.com/v1/artists/4oLeXFyACqeem2VImYeBFe",
+        "id": "4oLeXFyACqeem2VImYeBFe",
         "images": [
             {
                 "height": 640,
-                "url": "https://i.scdn.co/image/ab6761610000e5eb68e2885dc4801a62420eb88c",
+                "url": "https://i.scdn.co/image/ab6761610000e5eb69eea22d7189af21794f3043",
                 "width": 640
             },
             {
                 "height": 320,
-                "url": "https://i.scdn.co/image/ab6761610000517468e2885dc4801a62420eb88c",
+                "url": "https://i.scdn.co/image/ab6761610000517469eea22d7189af21794f3043",
                 "width": 320
             },
             {
                 "height": 160,
-                "url": "https://i.scdn.co/image/ab6761610000f17868e2885dc4801a62420eb88c",
+                "url": "https://i.scdn.co/image/ab6761610000f17869eea22d7189af21794f3043",
                 "width": 160
             }
         ],
-        "name": "Jeff Satur",
-        "popularity": 63,
+        "name": "Fred again..",
+        "popularity": 78,
         "type": "artist",
-        "uri": "spotify:artist:5xq3BK55BJmutN0X7eTyQB"
+        "uri": "spotify:artist:4oLeXFyACqeem2VImYeBFe"
+    },
+    {
+        "external_urls": {
+            "spotify": "https://open.spotify.com/artist/5he5w2lnU9x7JFhnwcekXX"
+        },
+        "followers": {
+            "href": null,
+            "total": 8154464
+        },
+        "genres": [
+            "brostep",
+            "complextro",
+            "edm",
+            "electro",
+            "pop dance"
+        ],
+        "href": "https://api.spotify.com/v1/artists/5he5w2lnU9x7JFhnwcekXX",
+        "id": "5he5w2lnU9x7JFhnwcekXX",
+        "images": [
+            {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab6761610000e5eb61f92702ca14484aa263a931",
+                "width": 640
+            },
+            {
+                "height": 320,
+                "url": "https://i.scdn.co/image/ab6761610000517461f92702ca14484aa263a931",
+                "width": 320
+            },
+            {
+                "height": 160,
+                "url": "https://i.scdn.co/image/ab6761610000f17861f92702ca14484aa263a931",
+                "width": 160
+            }
+        ],
+        "name": "Skrillex",
+        "popularity": 79,
+        "type": "artist",
+        "uri": "spotify:artist:5he5w2lnU9x7JFhnwcekXX"
+    },
+    {
+        "external_urls": {
+            "spotify": "https://open.spotify.com/artist/7Eu1txygG6nJttLHbZdQOh"
+        },
+        "followers": {
+            "href": null,
+            "total": 640175
+        },
+        "genres": [
+            "electronica",
+            "folktronica",
+            "indietronica",
+            "intelligent dance music",
+            "trip hop"
+        ],
+        "href": "https://api.spotify.com/v1/artists/7Eu1txygG6nJttLHbZdQOh",
+        "id": "7Eu1txygG6nJttLHbZdQOh",
+        "images": [
+            {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab6761610000e5eb84e29d09b4917bec2700a0d7",
+                "width": 640
+            },
+            {
+                "height": 320,
+                "url": "https://i.scdn.co/image/ab6761610000517484e29d09b4917bec2700a0d7",
+                "width": 320
+            },
+            {
+                "height": 160,
+                "url": "https://i.scdn.co/image/ab6761610000f17884e29d09b4917bec2700a0d7",
+                "width": 160
+            }
+        ],
+        "name": "Four Tet",
+        "popularity": 64,
+        "type": "artist",
+        "uri": "spotify:artist:7Eu1txygG6nJttLHbZdQOh"
     }
 ]

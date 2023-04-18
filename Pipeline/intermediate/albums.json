@@ -207,17 +207,17 @@
         "images": [
             {
                 "height": 640,
-                "url": "https://i.scdn.co/image/ab67616d0000b2735a3ab7750cbba2f7a3011cac",
+                "url": "https://i.scdn.co/image/ab67616d0000b27389ffd5210885306668146d14",
                 "width": 640
             },
             {
                 "height": 300,
-                "url": "https://i.scdn.co/image/ab67616d00001e025a3ab7750cbba2f7a3011cac",
+                "url": "https://i.scdn.co/image/ab67616d00001e0289ffd5210885306668146d14",
                 "width": 300
             },
             {
                 "height": 64,
-                "url": "https://i.scdn.co/image/ab67616d000048515a3ab7750cbba2f7a3011cac",
+                "url": "https://i.scdn.co/image/ab67616d0000485189ffd5210885306668146d14",
                 "width": 64
             }
         ],
@@ -11256,13 +11256,33 @@
         "artists": [
             {
                 "external_urls": {
-                    "spotify": "https://open.spotify.com/artist/5xq3BK55BJmutN0X7eTyQB"
+                    "spotify": "https://open.spotify.com/artist/4oLeXFyACqeem2VImYeBFe"
                 },
-                "href": "https://api.spotify.com/v1/artists/5xq3BK55BJmutN0X7eTyQB",
-                "id": "5xq3BK55BJmutN0X7eTyQB",
-                "name": "Jeff Satur",
+                "href": "https://api.spotify.com/v1/artists/4oLeXFyACqeem2VImYeBFe",
+                "id": "4oLeXFyACqeem2VImYeBFe",
+                "name": "Fred again..",
                 "type": "artist",
-                "uri": "spotify:artist:5xq3BK55BJmutN0X7eTyQB"
+                "uri": "spotify:artist:4oLeXFyACqeem2VImYeBFe"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/5he5w2lnU9x7JFhnwcekXX"
+                },
+                "href": "https://api.spotify.com/v1/artists/5he5w2lnU9x7JFhnwcekXX",
+                "id": "5he5w2lnU9x7JFhnwcekXX",
+                "name": "Skrillex",
+                "type": "artist",
+                "uri": "spotify:artist:5he5w2lnU9x7JFhnwcekXX"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/7Eu1txygG6nJttLHbZdQOh"
+                },
+                "href": "https://api.spotify.com/v1/artists/7Eu1txygG6nJttLHbZdQOh",
+                "id": "7Eu1txygG6nJttLHbZdQOh",
+                "name": "Four Tet",
+                "type": "artist",
+                "uri": "spotify:artist:7Eu1txygG6nJttLHbZdQOh"
             }
         ],
         "available_markets": [
@@ -11451,32 +11471,32 @@
             "ZW"
         ],
         "external_urls": {
-            "spotify": "https://open.spotify.com/album/4sNLO2KeOADZykYBkqclN1"
+            "spotify": "https://open.spotify.com/album/7J7redEXgOUEsUBXukhkUF"
         },
-        "href": "https://api.spotify.com/v1/albums/4sNLO2KeOADZykYBkqclN1",
-        "id": "4sNLO2KeOADZykYBkqclN1",
+        "href": "https://api.spotify.com/v1/albums/7J7redEXgOUEsUBXukhkUF",
+        "id": "7J7redEXgOUEsUBXukhkUF",
         "images": [
             {
                 "height": 640,
-                "url": "https://i.scdn.co/image/ab67616d0000b2735b27a956e0a5862b4b3f7606",
+                "url": "https://i.scdn.co/image/ab67616d0000b2738170b4ad7333efd476380396",
                 "width": 640
             },
             {
                 "height": 300,
-                "url": "https://i.scdn.co/image/ab67616d00001e025b27a956e0a5862b4b3f7606",
+                "url": "https://i.scdn.co/image/ab67616d00001e028170b4ad7333efd476380396",
                 "width": 300
             },
             {
                 "height": 64,
-                "url": "https://i.scdn.co/image/ab67616d000048515b27a956e0a5862b4b3f7606",
+                "url": "https://i.scdn.co/image/ab67616d000048518170b4ad7333efd476380396",
                 "width": 64
             }
         ],
-        "name": "Dum Dum",
-        "release_date": "2023-03-16",
+        "name": "Baby again..",
+        "release_date": "2023-03-17",
         "release_date_precision": "day",
-        "total_tracks": 2,
+        "total_tracks": 1,
         "type": "album",
-        "uri": "spotify:album:4sNLO2KeOADZykYBkqclN1"
+        "uri": "spotify:album:7J7redEXgOUEsUBXukhkUF"
     }
 ]

@@ -221,23 +221,23 @@
         "images": [
             {
                 "height": 640,
-                "url": "https://i.scdn.co/image/ab67616d0000b2735a3ab7750cbba2f7a3011cac",
+                "url": "https://i.scdn.co/image/ab67616d0000b27389ffd5210885306668146d14",
                 "width": 640
             },
             {
                 "height": 300,
-                "url": "https://i.scdn.co/image/ab67616d00001e025a3ab7750cbba2f7a3011cac",
+                "url": "https://i.scdn.co/image/ab67616d00001e0289ffd5210885306668146d14",
                 "width": 300
             },
             {
                 "height": 64,
-                "url": "https://i.scdn.co/image/ab67616d000048515a3ab7750cbba2f7a3011cac",
+                "url": "https://i.scdn.co/image/ab67616d0000485189ffd5210885306668146d14",
                 "width": 64
             }
         ],
         "label": "Atlantic Records",
         "name": "Eyes",
-        "popularity": 50,
+        "popularity": 52,
         "release_date": "2023-04-14",
         "release_date_precision": "day",
         "total_tracks": 1,
@@ -706,7 +706,7 @@
         ],
         "label": "Moon Boy University / EMPIRE",
         "name": "Love Scars II",
-        "popularity": 58,
+        "popularity": 61,
         "release_date": "2023-04-14",
         "release_date_precision": "day",
         "total_tracks": 15,
@@ -53190,13 +53190,33 @@
         "artists": [
             {
                 "external_urls": {
-                    "spotify": "https://open.spotify.com/artist/5xq3BK55BJmutN0X7eTyQB"
+                    "spotify": "https://open.spotify.com/artist/4oLeXFyACqeem2VImYeBFe"
                 },
-                "href": "https://api.spotify.com/v1/artists/5xq3BK55BJmutN0X7eTyQB",
-                "id": "5xq3BK55BJmutN0X7eTyQB",
-                "name": "Jeff Satur",
+                "href": "https://api.spotify.com/v1/artists/4oLeXFyACqeem2VImYeBFe",
+                "id": "4oLeXFyACqeem2VImYeBFe",
+                "name": "Fred again..",
                 "type": "artist",
-                "uri": "spotify:artist:5xq3BK55BJmutN0X7eTyQB"
+                "uri": "spotify:artist:4oLeXFyACqeem2VImYeBFe"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/5he5w2lnU9x7JFhnwcekXX"
+                },
+                "href": "https://api.spotify.com/v1/artists/5he5w2lnU9x7JFhnwcekXX",
+                "id": "5he5w2lnU9x7JFhnwcekXX",
+                "name": "Skrillex",
+                "type": "artist",
+                "uri": "spotify:artist:5he5w2lnU9x7JFhnwcekXX"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/7Eu1txygG6nJttLHbZdQOh"
+                },
+                "href": "https://api.spotify.com/v1/artists/7Eu1txygG6nJttLHbZdQOh",
+                "id": "7Eu1txygG6nJttLHbZdQOh",
+                "name": "Four Tet",
+                "type": "artist",
+                "uri": "spotify:artist:7Eu1txygG6nJttLHbZdQOh"
             }
         ],
         "available_markets": [
@@ -53386,273 +53406,80 @@
         ],
         "copyrights": [
             {
-                "text": "© 2023 Wayfer Records",
+                "text": "Under exclusive licence to Warner Music UK Limited .An Atlantic Records UK release, © 2023 Fred Gibson",
                 "type": "C"
             },
             {
-                "text": "℗ 2023 Wayfer Records",
+                "text": "Under exclusive licence to Warner Music UK Limited .An Atlantic Records UK release., ℗ 2023 Fred Gibson",
                 "type": "P"
             }
         ],
         "external_ids": {
-            "upc": "5054197613050"
+            "upc": "5054197600371"
         },
         "external_urls": {
-            "spotify": "https://open.spotify.com/album/4sNLO2KeOADZykYBkqclN1"
+            "spotify": "https://open.spotify.com/album/7J7redEXgOUEsUBXukhkUF"
         },
         "genres": [],
-        "href": "https://api.spotify.com/v1/albums/4sNLO2KeOADZykYBkqclN1",
-        "id": "4sNLO2KeOADZykYBkqclN1",
+        "href": "https://api.spotify.com/v1/albums/7J7redEXgOUEsUBXukhkUF",
+        "id": "7J7redEXgOUEsUBXukhkUF",
         "images": [
             {
                 "height": 640,
-                "url": "https://i.scdn.co/image/ab67616d0000b2735b27a956e0a5862b4b3f7606",
+                "url": "https://i.scdn.co/image/ab67616d0000b2738170b4ad7333efd476380396",
                 "width": 640
             },
             {
                 "height": 300,
-                "url": "https://i.scdn.co/image/ab67616d00001e025b27a956e0a5862b4b3f7606",
+                "url": "https://i.scdn.co/image/ab67616d00001e028170b4ad7333efd476380396",
                 "width": 300
             },
             {
                 "height": 64,
-                "url": "https://i.scdn.co/image/ab67616d000048515b27a956e0a5862b4b3f7606",
+                "url": "https://i.scdn.co/image/ab67616d000048518170b4ad7333efd476380396",
                 "width": 64
             }
         ],
-        "label": "WM/Thailand",
-        "name": "Dum Dum",
-        "popularity": 62,
-        "release_date": "2023-03-16",
+        "label": "Atlantic Records UK",
+        "name": "Baby again..",
+        "popularity": 69,
+        "release_date": "2023-03-17",
         "release_date_precision": "day",
-        "total_tracks": 2,
+        "total_tracks": 1,
         "tracks": {
-            "href": "https://api.spotify.com/v1/albums/4sNLO2KeOADZykYBkqclN1/tracks?offset=0&limit=50",
+            "href": "https://api.spotify.com/v1/albums/7J7redEXgOUEsUBXukhkUF/tracks?offset=0&limit=50",
             "items": [
                 {
                     "artists": [
                         {
                             "external_urls": {
-                                "spotify": "https://open.spotify.com/artist/5xq3BK55BJmutN0X7eTyQB"
+                                "spotify": "https://open.spotify.com/artist/4oLeXFyACqeem2VImYeBFe"
                             },
-                            "href": "https://api.spotify.com/v1/artists/5xq3BK55BJmutN0X7eTyQB",
-                            "id": "5xq3BK55BJmutN0X7eTyQB",
-                            "name": "Jeff Satur",
+                            "href": "https://api.spotify.com/v1/artists/4oLeXFyACqeem2VImYeBFe",
+                            "id": "4oLeXFyACqeem2VImYeBFe",
+                            "name": "Fred again..",
                             "type": "artist",
-                            "uri": "spotify:artist:5xq3BK55BJmutN0X7eTyQB"
-                        }
-                    ],
-                    "available_markets": [
-                        "AR",
-                        "AU",
-                        "AT",
-                        "BE",
-                        "BO",
-                        "BR",
-                        "BG",
-                        "CA",
-                        "CL",
-                        "CO",
-                        "CR",
-                        "CY",
-                        "CZ",
-                        "DK",
-                        "DO",
-                        "DE",
-                        "EC",
-                        "EE",
-                        "SV",
-                        "FI",
-                        "FR",
-                        "GR",
-                        "GT",
-                        "HN",
-                        "HK",
-                        "HU",
-                        "IS",
-                        "IE",
-                        "IT",
-                        "LV",
-                        "LT",
-                        "LU",
-                        "MY",
-                        "MT",
-                        "MX",
-                        "NL",
-                        "NZ",
-                        "NI",
-                        "NO",
-                        "PA",
-                        "PY",
-                        "PE",
-                        "PH",
-                        "PL",
-                        "PT",
-                        "SG",
-                        "SK",
-                        "ES",
-                        "SE",
-                        "CH",
-                        "TW",
-                        "TR",
-                        "UY",
-                        "US",
-                        "GB",
-                        "AD",
-                        "LI",
-                        "MC",
-                        "ID",
-                        "JP",
-                        "TH",
-                        "VN",
-                        "RO",
-                        "IL",
-                        "ZA",
-                        "SA",
-                        "AE",
-                        "BH",
-                        "QA",
-                        "OM",
-                        "KW",
-                        "EG",
-                        "MA",
-                        "DZ",
-                        "TN",
-                        "LB",
-                        "JO",
-                        "PS",
-                        "IN",
-                        "KZ",
-                        "MD",
-                        "UA",
-                        "AL",
-                        "BA",
-                        "HR",
-                        "ME",
-                        "MK",
-                        "RS",
-                        "SI",
-                        "KR",
-                        "BD",
-                        "PK",
-                        "LK",
-                        "GH",
-                        "KE",
-                        "NG",
-                        "TZ",
-                        "UG",
-                        "AG",
-                        "AM",
-                        "BS",
-                        "BB",
-                        "BZ",
-                        "BT",
-                        "BW",
-                        "BF",
-                        "CV",
-                        "CW",
-                        "DM",
-                        "FJ",
-                        "GM",
-                        "GE",
-                        "GD",
-                        "GW",
-                        "GY",
-                        "HT",
-                        "JM",
-                        "KI",
-                        "LS",
-                        "LR",
-                        "MW",
-                        "MV",
-                        "ML",
-                        "MH",
-                        "FM",
-                        "NA",
-                        "NR",
-                        "NE",
-                        "PW",
-                        "PG",
-                        "WS",
-                        "SM",
-                        "ST",
-                        "SN",
-                        "SC",
-                        "SL",
-                        "SB",
-                        "KN",
-                        "LC",
-                        "VC",
-                        "SR",
-                        "TL",
-                        "TO",
-                        "TT",
-                        "TV",
-                        "VU",
-                        "AZ",
-                        "BN",
-                        "BI",
-                        "KH",
-                        "CM",
-                        "TD",
-                        "KM",
-                        "GQ",
-                        "SZ",
-                        "GA",
-                        "GN",
-                        "KG",
-                        "LA",
-                        "MO",
-                        "MR",
-                        "MN",
-                        "NP",
-                        "RW",
-                        "TG",
-                        "UZ",
-                        "ZW",
-                        "BJ",
-                        "MG",
-                        "MU",
-                        "MZ",
-                        "AO",
-                        "CI",
-                        "DJ",
-                        "ZM",
-                        "CD",
-                        "CG",
-                        "IQ",
-                        "LY",
-                        "TJ",
-                        "VE",
-                        "ET",
-                        "XK"
-                    ],
-                    "disc_number": 1,
-                    "duration_ms": 195163,
-                    "explicit": false,
-                    "external_urls": {
-                        "spotify": "https://open.spotify.com/track/4XhdM1Ku9JM4abVuRWAsgk"
-                    },
-                    "href": "https://api.spotify.com/v1/tracks/4XhdM1Ku9JM4abVuRWAsgk",
-                    "id": "4XhdM1Ku9JM4abVuRWAsgk",
-                    "is_local": false,
-                    "name": "Dum Dum",
-                    "preview_url": "https://p.scdn.co/mp3-preview/b71992abefa324ef7c1aa84b798216528cc81102?cid=70b6029251944c06b7f4b7b9339a8f86",
-                    "track_number": 1,
-                    "type": "track",
-                    "uri": "spotify:track:4XhdM1Ku9JM4abVuRWAsgk"
-                },
-                {
-                    "artists": [
+                            "uri": "spotify:artist:4oLeXFyACqeem2VImYeBFe"
+                        },
                         {
                             "external_urls": {
-                                "spotify": "https://open.spotify.com/artist/5xq3BK55BJmutN0X7eTyQB"
+                                "spotify": "https://open.spotify.com/artist/5he5w2lnU9x7JFhnwcekXX"
                             },
-                            "href": "https://api.spotify.com/v1/artists/5xq3BK55BJmutN0X7eTyQB",
-                            "id": "5xq3BK55BJmutN0X7eTyQB",
-                            "name": "Jeff Satur",
+                            "href": "https://api.spotify.com/v1/artists/5he5w2lnU9x7JFhnwcekXX",
+                            "id": "5he5w2lnU9x7JFhnwcekXX",
+                            "name": "Skrillex",
                             "type": "artist",
-                            "uri": "spotify:artist:5xq3BK55BJmutN0X7eTyQB"
+                            "uri": "spotify:artist:5he5w2lnU9x7JFhnwcekXX"
+                        },
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/7Eu1txygG6nJttLHbZdQOh"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/7Eu1txygG6nJttLHbZdQOh",
+                            "id": "7Eu1txygG6nJttLHbZdQOh",
+                            "name": "Four Tet",
+                            "type": "artist",
+                            "uri": "spotify:artist:7Eu1txygG6nJttLHbZdQOh"
                         }
                     ],
                     "available_markets": [
@@ -53841,28 +53668,28 @@
                         "XK"
                     ],
                     "disc_number": 1,
-                    "duration_ms": 195163,
+                    "duration_ms": 319963,
                     "explicit": false,
                     "external_urls": {
-                        "spotify": "https://open.spotify.com/track/6McBFhOohQvx0zWkoISnap"
+                        "spotify": "https://open.spotify.com/track/4zlbKky2yA657Sk5rekZoR"
                     },
-                    "href": "https://api.spotify.com/v1/tracks/6McBFhOohQvx0zWkoISnap",
-                    "id": "6McBFhOohQvx0zWkoISnap",
+                    "href": "https://api.spotify.com/v1/tracks/4zlbKky2yA657Sk5rekZoR",
+                    "id": "4zlbKky2yA657Sk5rekZoR",
                     "is_local": false,
-                    "name": "Dum Dum - English Version",
-                    "preview_url": "https://p.scdn.co/mp3-preview/fbe467b762a791694cae7a6b89900fff1f22d102?cid=70b6029251944c06b7f4b7b9339a8f86",
-                    "track_number": 2,
+                    "name": "Baby again..",
+                    "preview_url": "https://p.scdn.co/mp3-preview/60108f6eb9102afa78b517b6742a69e56a11e770?cid=70b6029251944c06b7f4b7b9339a8f86",
+                    "track_number": 1,
                     "type": "track",
-                    "uri": "spotify:track:6McBFhOohQvx0zWkoISnap"
+                    "uri": "spotify:track:4zlbKky2yA657Sk5rekZoR"
                 }
             ],
             "limit": 50,
             "next": null,
             "offset": 0,
             "previous": null,
-            "total": 2
+            "total": 1
         },
         "type": "album",
-        "uri": "spotify:album:4sNLO2KeOADZykYBkqclN1"
+        "uri": "spotify:album:7J7redEXgOUEsUBXukhkUF"
     }
 ]

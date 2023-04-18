@@ -28,6 +28,12 @@ def predict_genre_op():
     
     #Min max transform
     sc = joblib.load(f'{path}/airflow/dags/Model/Genre Prediction Data Preprocess.joblib')
+    genre = genre[['id','danceability', 'speechiness', 'acousticness', 'instrumentalness',
+    'liveness', 'valence', 'tempo', 'duration_ms', 'key_0', 'key_1',
+    'key_2', 'key_3', 'key_4', 'key_5', 'key_6', 'key_7', 'key_8',
+    'key_9', 'key_10', 'key_11', 'mode_0', 'mode_1',
+    'time_signature_0', 'time_signature_1', 'time_signature_3',
+    'time_signature_4', 'time_signature_5']]
     genre_trans = sc.transform(genre.iloc[:,1:])
 
     #predict

@@ -38,7 +38,8 @@ from is3107.dump_track_info import dump_trackinfo_op                            
 from is3107.dump_audio_features import dump_audiofeatures_op                        #Task17
 from is3107.dump_artist import dump_artist_op                                       #Task18
 
-from is3107.prediction_newly_release import prediction_newly_release_op
+from is3107.prediction_newly_release import prediction_newly_release_op             #Task19
+from is3107.update_feature_distribution import update_feature_distribution_op       #Task20
 import os
 path = os.getcwd()
 # [END import_module]
@@ -278,6 +279,13 @@ with DAG(
         print("PREDICTION DONE")
     # [END prediction]
 
+    # [START update feature distribution]
+    def update_feature_distribution(**kwargs):
+        ti = kwargs['ti']
+        update_feature_distribution_op()
+        print("UPDATE FEATURE DISTRIBUTION DONE")
+    # [END  update_feature_distribution]
+
     # [START main_flow]
 
     Task0 = PythonOperator(
@@ -442,13 +450,22 @@ with DAG(
         ''''''
     )
 
+    
+    Task20 = PythonOperator(
+        task_id='update_feature_distribution',
+        python_callable=update_feature_distribution,
+    )
+    Task20.doc_md = dedent(
+        ''''''
+    )
+
     Task0 >> Task1 >> Task2 >> [Task3, Task4, Task5]
     Task3 >> Task15
     Task4 >> Task6 >> [Task7, Task8]
 
     Task7 >> Task9 >> Task10 >> Task16
 
-    Task8 >> Task11 >> Task12 >> [Task17,Task19]
+    Task8 >> Task11 >> Task12 >> [Task17,Task19,Task20]
     Task5 >> Task13 >> Task14 >> Task18
     
     # [END main_flow]
