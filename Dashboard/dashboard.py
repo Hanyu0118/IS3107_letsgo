@@ -74,8 +74,8 @@ genres = list(track_genre_df.columns)[1:]
 
 features = list(feature_df.columns)
 
-# spotify_logo = Image.open("D:/y3s2/IS3107_letsgo/spotify_logo.png")
-spotify_logo = Image.open("../spotify_logo.png")
+spotify_logo = Image.open("D:/y3s2/IS3107_letsgo/spotify_logo.png")
+# spotify_logo = Image.open("../spotify_logo.png")
 
 color_palette = sns.color_palette("Paired").pop(2)
 
@@ -91,15 +91,15 @@ st.sidebar.image(spotify_logo, width = 150)
 def plot_config(fig, ax):
     fig.patch.set_alpha(0)
     ax.patch.set_alpha(0)
-    ax.spines['bottom'].set_color('black')
-    ax.spines['top'].set_color('black')
-    ax.spines['left'].set_color('black')
-    ax.spines['right'].set_color('black')
-    ax.xaxis.label.set_color('black')
-    ax.yaxis.label.set_color('black')
+    ax.spines['bottom'].set_color('white')
+    ax.spines['top'].set_color('white')
+    ax.spines['left'].set_color('white')
+    ax.spines['right'].set_color('white')
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
     ax.title.set_color('white')
-    ax.tick_params(axis='x', colors='black')
-    ax.tick_params(axis='y', colors='black')
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
     return fig, ax
 
 
@@ -131,31 +131,6 @@ with col:
 if page == 'Genre & Popularity Coverage':
     placeholder.empty()
     
-    # c1 = st.container()
-    
-    # with c1:
-    #     col1, col2 = st.columns([6,3.5])
-    #     with col1:
-    #         st.header("Genre Distribution")
-    #         fig, ax = plt.subplots(figsize=(10,4))
-    #         sns.barplot(y=genre_df['genre'], x=genre_df['total_tracks'], ax=ax, palette="Set2", errorbar=None)
-    #         fig, ax = plot_config(fig, ax)
-    #         st.pyplot(fig)
-    #     with col2:
-    #         st.header("Popularity of Genres")
-    #         fig, ax = plt.subplots(figsize=(30,2))
-    #         # pop_sum = sum(genre_df['mean_popularity'])
-    #         # genre_df['pop_percent'] = genre_df['mean_popularity'] / pop_sum
-    #         # genre_df['label'] = genre_df.apply((lambda x: x['genre'] + ' ' + str(round(x['pop_percent']*100, 2)) + '%'), axis=1)
-    #         patches, l_text, p_text= plt.pie(genre_df['mean_popularity'], labels = genre_df['genre'], labeldistance=1.05, autopct='%1.1f%%')
-    #         for t in l_text:
-    #             t.set_size(3.5)
-    #         for p in p_text:
-    #             p.set_size(3)
-    #         fig, ax = plot_config(fig, ax)
-    #         plt.tight_layout()
-    #         st.pyplot(plt)
-    
     c2 = st.container()
     
     with c2:
@@ -171,9 +146,6 @@ if page == 'Genre & Popularity Coverage':
         with col4:
             pop_threshold = st.slider("maximum poplarity", 0, 100, 100)
             # st.header("Top Tracks Features")
-
-           
-            
     
 
 # Tracks in terms of popularity (/danceability/energy/singer/team etc) in a genre - scatter plot - 2
@@ -235,12 +207,11 @@ if page == 'Genre & Popularity Coverage':
 
 # tab - prediction
 if page == 'Newly Released Prediction':
-# if page2 == True:
-    st.write("hi")
+    placeholder.empty()
+    
                 
 
 if page == 'User Prediction':
-# if page3 == True:
     placeholder.empty()
     c1 = st.container()
     c2 = st.container()
@@ -256,13 +227,12 @@ if page == 'User Prediction':
             # filter - plot type
             chosen_plot = st.selectbox("choose a plot type", ["histogram", "boxplot"])
         with col3:
-            target_df = track_feature_genre_df[track_feature_genre_df[[chosen_genre]] == 1]
+            target_df = track_feature_genre_df[track_feature_genre_df[chosen_genre] == 1]
             fig, ax = plt.subplots(figsize=(18,7))
             if chosen_plot == "boxplot":
-                st.write("hi")
-                sns.boxplot(target_df[chosen_feature], palette="Set2")
+                sns.boxplot(x=target_df[chosen_feature], color="#1DB954",flierprops={'marker': 'o', 'markersize': 10, 'markerfacecolor': '#1DB954'})
             else:
-                sns.histplot(target_df[chosen_feature])
+                sns.histplot(target_df[chosen_feature], color="#1DB954")
             fig, ax = plot_config(fig, ax)
             st.pyplot(fig)
                 
@@ -304,11 +274,3 @@ if page == 'User Prediction':
                 plt.axvline(popularity[0], color = 'orange',linewidth = 6)
                 fig, ax = plot_config(fig, ax)
                 st.pyplot(fig)
-
-# st.markdown('''
-#             <style>
-#             .st-bm .st-b3 .st-bn .st-bk .st-ar .st-bo .st-as .st-bp .st-bq .st-br .st-au .st-av .st-ax .st-aw:hover {
-#                 background-color: #2196F3;
-#             }
-#             </style>
-#             ''', unsafe_allow_html=True)
