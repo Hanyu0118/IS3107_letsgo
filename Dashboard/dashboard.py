@@ -148,10 +148,27 @@ with col:
 # if page1 == True:
 if page == 'Market Overview':
     placeholder.empty()
+
+    c4 = st.container()
+    with c4:
+        st.header(":orange[Top Artists Analysis]")
+        artist_pop_threshold = st.slider("maximum artist poplarity", 0, 100, 100)
+        attribute_option = st.selectbox('Choose an attribute to plot', ('Popularity','Followers'))
+        fig, ax = plt.subplots(figsize=(15,7))
+        artist_df = artist_df[artist_df['popularity'] <= artist_pop_threshold]
+        if len(artist_df) > 0: 
+            sns.barplot(y=artist_df[attribute_option.lower()][:5], x=artist_df['name'][:5], width= 0.6, palette="Set2")
+            ax.set_xlabel('Singer',fontsize = 14)
+            ax.set_ylabel(attribute_option,fontsize = 14)
+            fig, ax = plot_config(fig, ax)
+            st.pyplot(fig)
+        
+    st.markdown("""---""")
     c0 = st.container()
     
     with c0:
-        st.header("1. Feature Analysis")
+        st.header(":orange[Feature Analysis]")
+        st.subheader("Time trend")
         feature_option = st.selectbox('Choose a feature to plot', ('Danceability', 'Energy', 'Loudness', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence','Tempo', 'Duration_ms'))
         
         fig, ax = plt.subplots(figsize=(15,7))
@@ -165,6 +182,7 @@ if page == 'Market Overview':
     c2 = st.container()
     
     with c2:
+        st.subheader("Genre popularity")
         col1, col2, col3, col4 = st.columns([1,4,1,4])
         with col1:
             st.subheader("Filter:")
@@ -193,25 +211,13 @@ if page == 'Market Overview':
         filtered = pop_filtered[pop_filtered['sum'] >=1][0:5]
         fig, ax = plt.subplots(figsize=(15,7))
 
-        sns.barplot(y=filtered['popularity'][0:5], x=filtered['name'][0:5], width = 0.6, palette="Set2")
-        ax.set_xlabel('Track',fontsize = 14)
-        ax.set_ylabel('Popularity',fontsize = 14)
+        sns.barplot(x=filtered['popularity'][0:5], y=filtered['name'][0:5], width = 0.6, palette="Set2")
+        ax.set_xlabel('Track',fontsize = 20)
+        ax.set_ylabel('Popularity',fontsize = 20)
         fig, ax = plot_config(fig, ax)
         st.pyplot(fig)
 
-    c4 = st.container()
-    with c4:
-        st.header("2. Top Singers Analysis")
-        artist_pop_threshold = st.slider("maximum artist poplarity", 0, 100, 100)
-        attribute_option = st.selectbox('Choose an attribute to plot', ('Popularity','Followers'))
-        fig, ax = plt.subplots(figsize=(15,7))
-        artist_df = artist_df[artist_df['popularity'] <= artist_pop_threshold]
-        if len(artist_df) > 0: 
-            sns.barplot(y=artist_df[attribute_option.lower()][:5], x=artist_df['name'][:5], width= 0.6, palette="Set2")
-            ax.set_xlabel('Singer',fontsize = 14)
-            ax.set_ylabel(attribute_option,fontsize = 14)
-            fig, ax = plot_config(fig, ax)
-            st.pyplot(fig)
+    
 
 # # Top Tracks Features in Genre
 #     c4 = st.container()
@@ -249,9 +255,9 @@ if page == 'Newly Released':
             predicted_mean = round(np.mean(popularity_diff.future_popularity.values),2)
             current_mean = round(np.mean(popularity_diff.current_popularity.values),2)
             st.metric(label="Predicted Popularity", value=predicted_mean, delta = f'{round(predicted_mean - current_mean,2)} Current Popularity {current_mean}',  delta_color="inverse")
-        
         col3, col4 = st.columns(2)
         with col3:
+            st.subheader('Predictied Genre Counts')
             g = sns.catplot(y = 'Genre',kind="count",data = genre_predicted, palette="pastel")
             g.set_axis_labels("Count of Tracks ", "Predicted Genre")
             fig, ax = g.fig, g.ax
@@ -259,8 +265,9 @@ if page == 'Newly Released':
             st.pyplot(fig)
         
         with col4:
+            st.subheader('Hitting the market')
             for i in range(len(new_artists)):
-                st.subheader(f':green[{new_artists.iloc[i,0]}] hitting the market')
+                st.subheader(f':green[{new_artists.iloc[i,0]}]')
                 col5, col6 = st.columns(2)
                 with col5:
                     st.caption(f'Followers: _{new_artists.iloc[i,1]}_')
@@ -272,7 +279,7 @@ if page == 'Newly Released':
     with c2:
         st.title("Newly Released Track Details")
         cm = sns.light_palette("green", as_cmap=True)   
-        st.dataframe( popularity_diff.style.set_properties(subset=['name'], **{'width': '2px'}).background_gradient(cmap=cm, subset=['popularity_diff']).highlight_max(subset=['current_popularity','future_popularity','popularity_diff'], color='lightblue').set_caption('Newly Release Popularity Prediction Detail.'),
+        st.dataframe( popularity_diff.style.set_properties(subset=['name'], **{'width': '2px'}).background_gradient(cmap=cm, subset=['popularity_diff']).highlight_max(subset=['current_popularity','future_popularity','popularity_diff'], color='orange').set_caption('Newly Release Popularity Prediction Detail.'),
                      use_container_width=True)
 
 
@@ -284,7 +291,7 @@ if page == 'User Prediction':
     c1 = st.container()
     c2 = st.container()
     with c1:
-        st.title('Track Popularity Predictor')
+        st.title(':orange[Track Popularity Predictor]')
         # visual
         col1, col2, col3 = st.columns([3, 1, 7])
         with col1:
@@ -299,17 +306,22 @@ if page == 'User Prediction':
             fig, ax = plt.subplots(figsize=(18,7))
             if chosen_plot == "boxplot":
                 sns.boxplot(x=target_df[chosen_feature], color="#1DB954",flierprops={'marker': 'o', 'markersize': 10, 'markerfacecolor': '#1DB954'})
+                ax.set_xlabel(chosen_feature,fontsize = 20)
+                ax.set_ylabel('Count',fontsize = 20)
             else:
                 sns.histplot(target_df[chosen_feature], color="#1DB954")
+                ax.set_xlabel(chosen_feature,fontsize = 20)
+                ax.set_ylabel('Count',fontsize = 20)
             fig, ax = plot_config(fig, ax)
             st.pyplot(fig)
                 
-        st.divider()
+        st.markdown("---------------------------------")
         # col1, col, col2 = st.columns([1,2,1])
         # with col:
         #     st.image("""https://pyxis.nymag.com/v1/imgs/3a3/b1f/2141226b8ab1ae07afe4b541ee0d2b0825-11-yic-pop-essay.rsocial.w1200.jpg""")
         col1, col, col2 = st.columns([7,1,7])
         with col1:
+            st.caption('Enter track related information below')
             released_date = st.date_input('Released Date:',datetime.datetime.now())
             danceability = st.number_input('Danceability:', min_value=0.0, max_value=1.0)
             energy = st.number_input('Energy:', min_value=0.0, max_value=1.0)
@@ -332,21 +344,32 @@ if page == 'User Prediction':
 
         popularity_vars = [released_date,danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,duration_ms,time_signature,explicit,available_markets,followers,popularity_artist]
         genre_vars = [danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,duration_ms,time_signature]
-        if st.button('Predict'):
-            #Popularity
-            popularity = pop_predict(popularity_vars)
-            st.success(f'The predicted popularity of the track is {popularity[0]:.2f}')
+        col3, col4 = st.columns([7,1])
+        predicted = False
+        with col4: 
+            if st.button('Predict'):
+                #Popularity
+                predicted = True
+                popularity = pop_predict(popularity_vars)
+        if predicted:
+            st.success(f'The predicted popularity of the track is:')
             col1, col, col2 = st.columns([2,5,2])
             with col:
+                st.header(':orange[{}!]'.format(round(popularity[0],2)))
+                st.caption('Predicted popularity details')
                 fig, ax = plt.subplots(figsize=(15,8))
                 sns.kdeplot(data=track_feature_df, x="popularity",fill = True,alpha=0.5, color = '#4CC9F0')
+                ax.set_xlabel('Popularity',fontsize = 20)
+                ax.set_ylabel('Density',fontsize = 20)
                 plt.axvline(popularity[0], color = 'orange',linewidth = 6)
                 fig, ax = plot_config(fig, ax)
                 st.pyplot(fig)
             
             #Genre
             genres = genre_predict(genre_vars)
-            st.success(f'The predicted genre of the track is {genres}')
+            st.success(f'The predicted genre of the track is: ')
+            col1, col, col2 = st.columns([2,5,2])
+            with col: 
+                st.header(':orange[{}!]'.format(genres))
 
         
-            
