@@ -13,8 +13,6 @@ def pop_predict(vars):
        'available_markets', 'followers', 'popularity_artist'], axis=1, inplace=False)
     vars_df['release_date']=100
     vars_df[['key','mode','time_signature','explicit']] = vars_df[['key','mode','time_signature','explicit']].astype('Int64')  
-    print(vars_df.dtypes)
-    print(path)
     pop_prepro_from_joblib = joblib.load(f'{path}/Model/Popularity Prediction Data Preprocess.joblib')
     pop_from_joblib = joblib.load(f'{path}/Model/Popularity Prediction Model.sav')
     processed_vars_df = pd.DataFrame(pop_prepro_from_joblib.transform(vars_df))
@@ -57,5 +55,4 @@ def genre_predict(vars):
    id_vars=['id'], var_name='Genre', value_name='binary')
    genre_unpivot = genre_unpivot[genre_unpivot["binary"] == 1]
    genre_unpivot.drop(['binary'], axis=1, inplace=True)
-   print(genre_unpivot)
    return ','.join(genre_unpivot.Genre.values.tolist())
