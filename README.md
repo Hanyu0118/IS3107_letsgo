@@ -12,5 +12,5 @@ pip install -r requirements.txt
 Dashboard portal: https://
 
 ## Pipeline Instruction
--- Place folder in side **Pipeline** folder into airflow/dags in you local device
--- Start the virtual environment and run the pipeline
+- Place folder inside **Pipeline** folder into airflow/dags in you local device
+- Start the virtual environment and run the pipeline
