@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import datetime
 from PIL import Image
 import os
+import numpy as np
 path = os.getcwd()
 print(path)
 
@@ -71,15 +72,29 @@ track_genre_df = pd.DataFrame(track_genre_rows)
 track_feature_genre_df = pd.merge(track_feature_df, track_genre_df, left_on="id", right_on = "track_id",how="inner")
 track_feature_genre_df = track_feature_genre_df.sort_values(by=['popularity'],ascending=False)
 
-
+feature_distribution = pd.DataFrame(run_query('SELECT * FROM snappy-boulder-378707.History.FeatureDistribution'))
+#Newly Release
+popularity_diff = pd.DataFrame(run_query('''
+SELECT t1.name, t3.release_date, t1.popularity as current_popularity,
+t2.popularity as future_popularity, (t2.popularity - t1.popularity) as popularity_diff
+FROM `snappy-boulder-378707.NewReleases.NewTracks`  as t1
+inner join snappy-boulder-378707.NewReleases.PopularityPrediction as t2
+on t1.id = t2.id
+inner join snappy-boulder-378707.NewReleases.NewAlbums as t3
+on t1.album_id = t3.id
+order by 5 desc'''))
+genre_predicted = pd.DataFrame(run_query('SELECT * FROM snappy-boulder-378707.NewReleases.GenrePrediction'))
+new_artists = pd.DataFrame(run_query('''SELECT name, followers, popularity 
+FROM snappy-boulder-378707.NewReleases.Artists as t1
+order by followers desc, popularity desc
+limit 3'''))
+#Filters
 genres = list(track_genre_df.columns)[1:]
-
-
 features = list(feature_df.columns)
 
+#logo
 spotify_logo = Image.open(f"{path}/spotify_logo.png")
 # spotify_logo = Image.open("../spotify_logo.png")
-
 color_palette = sns.color_palette("Paired").pop(2)
 
 
@@ -110,7 +125,7 @@ def plot_config(fig, ax):
 
 page = st.sidebar.radio(
     "Select your interested page",
-    ('Genre & Popularity Coverage', 'Newly Released Prediction', 'User Prediction'))
+    ('Market Overview', 'Newly Released', 'User Prediction'))
 
 st.markdown('''
             <style>
@@ -131,13 +146,25 @@ with col:
 
 # tab - visualisation
 # if page1 == True:
-if page == 'Genre & Popularity Coverage':
+if page == 'Market Overview':
     placeholder.empty()
+    c0 = st.container()
+    
+    with c0:
+        st.header("1. Feature Analysis")
+        feature_option = st.selectbox('Choose a feature to plot', ('Danceability', 'Energy', 'Loudness', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence','Tempo', 'Duration_ms'))
+        
+        fig, ax = plt.subplots(figsize=(15,7))
+
+        sns.lineplot(x='year', y= feature_option.lower(), data=feature_distribution,color='#79C', linewidth=2.5)
+        ax.set_xlabel('Year',fontsize = 14)
+        ax.set_ylabel(feature_option,fontsize = 14)
+        fig, ax = plot_config(fig, ax)
+        st.pyplot(fig)
     
     c2 = st.container()
     
     with c2:
-        st.header("1. Feature Analysis")
         col1, col2, col3, col4 = st.columns([1,4,1,4])
         with col1:
             st.subheader("Filter:")
@@ -158,7 +185,7 @@ if page == 'Genre & Popularity Coverage':
     with c3:
         # col1 = st.columns([1])
         # with col1:
-        feature_option = st.selectbox('Choose a feature to plot', ('Popularity','Danceability', 'Energy', 'Loudness', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence','Tempo', 'Duration_ms','Available_Markets'))
+        #feature_option = st.selectbox('Choose a feature to plot', ('Popularity','Danceability', 'Energy', 'Loudness', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence','Tempo', 'Duration_ms','Available_Markets'))
         if not genre_chosen:
             genre_chosen = genres
         pop_filtered = feature_pop_df[feature_pop_df['popularity'] <= pop_threshold]
@@ -166,9 +193,9 @@ if page == 'Genre & Popularity Coverage':
         filtered = pop_filtered[pop_filtered['sum'] >=1][0:5]
         fig, ax = plt.subplots(figsize=(15,7))
 
-        sns.barplot(y=filtered[feature_option.lower()][0:5], x=filtered['name'][0:5], width = 0.6, palette="Set2")
+        sns.barplot(y=filtered['popularity'][0:5], x=filtered['name'][0:5], width = 0.6, palette="Set2")
         ax.set_xlabel('Track',fontsize = 14)
-        ax.set_ylabel(feature_option,fontsize = 14)
+        ax.set_ylabel('Popularity',fontsize = 14)
         fig, ax = plot_config(fig, ax)
         st.pyplot(fig)
 
@@ -209,9 +236,47 @@ if page == 'Genre & Popularity Coverage':
 
 
 # tab - prediction
-if page == 'Newly Released Prediction':
+if page == 'Newly Released':
     placeholder.empty()
+    c1 = st.container()
+    with c1:
+        st.title("Newly Released Track Overview")
+        #visual
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric(label="Total New Tracks", value=len(popularity_diff['name'].unique()),  delta_color="inverse")
+        with col2:
+            predicted_mean = round(np.mean(popularity_diff.future_popularity.values),2)
+            current_mean = round(np.mean(popularity_diff.current_popularity.values),2)
+            st.metric(label="Predicted Popularity", value=predicted_mean, delta = f'{round(predicted_mean - current_mean,2)} Current Popularity {current_mean}',  delta_color="inverse")
+        
+        col3, col4 = st.columns(2)
+        with col3:
+            g = sns.catplot(y = 'Genre',kind="count",data = genre_predicted, palette="pastel")
+            g.set_axis_labels("Count of Tracks ", "Predicted Genre")
+            fig, ax = g.fig, g.ax
+            fig, ax = plot_config(fig, ax)
+            st.pyplot(fig)
+        
+        with col4:
+            for i in range(len(new_artists)):
+                st.subheader(f':green[{new_artists.iloc[i,0]}] hitting the market')
+                col5, col6 = st.columns(2)
+                with col5:
+                    st.caption(f'Followers: _{new_artists.iloc[i,1]}_')
+                with col6:
+                    st.caption(f'Popularity: _{new_artists.iloc[i,2]}_')
+                st.markdown("""-----------------------""") ##need to reduce this
     
+    c2 = st.container()
+    with c2:
+        st.title("Newly Released Track Details")
+        cm = sns.light_palette("green", as_cmap=True)   
+        st.dataframe( popularity_diff.style.set_properties(subset=['name'], **{'width': '2px'}).background_gradient(cmap=cm, subset=['popularity_diff']).highlight_max(subset=['current_popularity','future_popularity','popularity_diff'], color='lightblue').set_caption('Newly Release Popularity Prediction Detail.'),
+                     use_container_width=True)
+
+
+
                 
 
 if page == 'User Prediction':
@@ -239,8 +304,7 @@ if page == 'User Prediction':
             fig, ax = plot_config(fig, ax)
             st.pyplot(fig)
                 
-        
-        
+        st.divider()
         # col1, col, col2 = st.columns([1,2,1])
         # with col:
         #     st.image("""https://pyxis.nymag.com/v1/imgs/3a3/b1f/2141226b8ab1ae07afe4b541ee0d2b0825-11-yic-pop-essay.rsocial.w1200.jpg""")
