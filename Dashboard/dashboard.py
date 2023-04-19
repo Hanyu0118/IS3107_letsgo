@@ -278,6 +278,7 @@ if page == 'Newly Released':
     c2 = st.container()
     with c2:
         st.title("Newly Released Track Details")
+        st.caption('*Top number of each column is highlighted by orange')
         cm = sns.light_palette("green", as_cmap=True)   
         st.dataframe( popularity_diff.style.set_properties(subset=['name'], **{'width': '2px'}).background_gradient(cmap=cm, subset=['popularity_diff']).highlight_max(subset=['current_popularity','future_popularity','popularity_diff'], color='orange').set_caption('Newly Release Popularity Prediction Detail.'),
                      use_container_width=True)
