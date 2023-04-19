@@ -1,6 +1,6 @@
 # streamlit_app.py
 from pandas.core.arrays.integer import Int64Dtype
-from Prediction import pop_predict
+from Prediction import pop_predict, genre_predict
 import streamlit as st
 from google.oauth2 import service_account
 from google.cloud import bigquery
@@ -9,6 +9,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
 from PIL import Image
+import os
+path = os.getcwd()
+print(path)
 
 # Page config
 st.set_page_config(page_icon=":musical_note:", page_title="SpotifyPlus", layout="wide")
@@ -24,8 +27,8 @@ client = bigquery.Client(credentials=credentials)
 # Perform query.
 # Uses st.cache_data to only rerun when the query changes or after 10 min.
 # @st.cache_data(ttl=600)
-@st.experimental_memo
-#@st.cache_data # it shows warning using experimental_memo
+#@st.experimental_memo
+@st.cache_data # it shows warning using experimental_memo
 
 def run_query(query):
     query_job = client.query(query)
@@ -74,7 +77,7 @@ genres = list(track_genre_df.columns)[1:]
 
 features = list(feature_df.columns)
 
-spotify_logo = Image.open("D:/y3s2/IS3107_letsgo/spotify_logo.png")
+spotify_logo = Image.open(f"{path}/spotify_logo.png")
 # spotify_logo = Image.open("../spotify_logo.png")
 
 color_palette = sns.color_palette("Paired").pop(2)
@@ -263,9 +266,11 @@ if page == 'User Prediction':
             followers = st.number_input('Followers:', min_value=0, max_value=1 * 10**10)
             popularity_artist = st.number_input('Artist popularity:', min_value=0.0, max_value=100.0)
 
-        vars = [released_date,danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,duration_ms,time_signature,explicit,available_markets,followers,popularity_artist]
-        if st.button('Predict Popularity'):
-            popularity = pop_predict(vars)
+        popularity_vars = [released_date,danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,duration_ms,time_signature,explicit,available_markets,followers,popularity_artist]
+        genre_vars = [danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,duration_ms,time_signature]
+        if st.button('Predict'):
+            #Popularity
+            popularity = pop_predict(popularity_vars)
             st.success(f'The predicted popularity of the track is {popularity[0]:.2f}')
             col1, col, col2 = st.columns([2,5,2])
             with col:
@@ -274,3 +279,10 @@ if page == 'User Prediction':
                 plt.axvline(popularity[0], color = 'orange',linewidth = 6)
                 fig, ax = plot_config(fig, ax)
                 st.pyplot(fig)
+            
+            #Genre
+            genres = genre_predict(genre_vars)
+            st.success(f'The predicted genre of the track is {genres}')
+
+        
+            
