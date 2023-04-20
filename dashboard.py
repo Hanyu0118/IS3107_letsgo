@@ -93,7 +93,7 @@ genres = list(track_genre_df.columns)[1:]
 features = list(feature_df.columns)
 
 #logo
-spotify_logo = Image.open("/app/is3107_letsgo/Dashboard/spotify_logo.png")
+spotify_logo = Image.open("spotify_logo.png")
 #spotify_logo = Image.open("spotify_logo.png")
 # spotify_logo = Image.open("D:/y3s2/IS3107_letsgo/dashboard/spotify_logo.png")
 color_palette = sns.color_palette("Paired").pop(2)
