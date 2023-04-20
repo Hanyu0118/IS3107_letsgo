@@ -93,8 +93,9 @@ genres = list(track_genre_df.columns)[1:]
 features = list(feature_df.columns)
 
 #logo
-spotify_logo = Image.open(f"{path}/spotify_logo.png")
+# spotify_logo = Image.open(f"{path}/spotify_logo.png")
 # spotify_logo = Image.open("../spotify_logo.png")
+spotify_logo = Image.open("D:/y3s2/IS3107_letsgo/dashboard/spotify_logo.png")
 color_palette = sns.color_palette("Paired").pop(2)
 
 
@@ -116,8 +117,8 @@ def plot_config(fig, ax):
     ax.xaxis.label.set_color('white')
     ax.yaxis.label.set_color('white')
     ax.title.set_color('white')
-    ax.tick_params(axis='x', colors='white')
-    ax.tick_params(axis='y', colors='white')
+    ax.tick_params(axis='x', colors='white', labelsize=13)
+    ax.tick_params(axis='y', colors='white', labelsize=13)
     return fig, ax
 
 
@@ -153,14 +154,32 @@ if page == 'Market Overview':
     with c4:
         st.header(":orange[Top Artists Analysis]")
         artist_pop_threshold = st.slider("maximum artist poplarity", 0, 100, 100)
-        attribute_option = st.selectbox('Choose an attribute to plot', ('Popularity','Followers'))
         fig, ax = plt.subplots(figsize=(15,7))
         artist_df = artist_df[artist_df['popularity'] <= artist_pop_threshold]
         if len(artist_df) > 0: 
-            sns.barplot(y=artist_df[attribute_option.lower()][:5], x=artist_df['name'][:5], width= 0.6, palette="Set2")
+            plot_df = artist_df[:5]
+            plt.bar(x=plot_df["name"], height=plot_df['popularity'], align='edge', width=-0.3, color="#e99675")
+            plt.ylabel('Popularity', color = '#e99675', fontsize=14)
+            plt.tick_params(axis = 'y', labelcolor = '#e99675')
+            for x, y in enumerate(plot_df['popularity'].values):
+                plt.text(x-0.1, y+0.1, y, ha='right', va='bottom', color="#e99675")
+            ax2 = plt.twinx()
+            ax2.bar(x=plot_df["name"], height=plot_df['followers'], align='edge', width=0.3, color="#95a3c3")
+            ax2.set_ylabel('Followers', color = '#95a3c3', fontsize=14)
+            plt.tick_params(axis = 'y', labelcolor = '#95a3c3')
+            for x, y in enumerate(plot_df['followers'].values):
+                label = str(y//1000) + 'k'
+                plt.text(x+0.03, y+0.1, label, ha='left', va='bottom', color="#95a3c3")
             ax.set_xlabel('Singer',fontsize = 14)
-            ax.set_ylabel(attribute_option,fontsize = 14)
-            fig, ax = plot_config(fig, ax)
+            fig.patch.set_alpha(0)
+            ax.patch.set_alpha(0)
+            ax2.spines['bottom'].set_color('white')
+            ax2.spines['top'].set_color('white')
+            ax2.spines['left'].set_color('#e99675')
+            ax2.spines['right'].set_color('#95a3c3')
+            ax.xaxis.label.set_color('white')
+            ax.title.set_color('white')
+            ax.tick_params(axis='x', colors='white')
             st.pyplot(fig)
         
     st.markdown("""---""")
@@ -174,6 +193,7 @@ if page == 'Market Overview':
         fig, ax = plt.subplots(figsize=(15,7))
 
         sns.lineplot(x='year', y= feature_option.lower(), data=feature_distribution,color='#79C', linewidth=2.5)
+        # addlabels(feature_distribution['year'], feature_distribution[feature_option.lower()])
         ax.set_xlabel('Year',fontsize = 14)
         ax.set_ylabel(feature_option,fontsize = 14)
         fig, ax = plot_config(fig, ax)
@@ -182,7 +202,7 @@ if page == 'Market Overview':
     c2 = st.container()
     
     with c2:
-        st.subheader("Genre popularity")
+        st.subheader("Top Songs Based on Genre and Popularity")
         col1, col2, col3, col4 = st.columns([1,4,1,4])
         with col1:
             st.subheader("Filter:")
@@ -210,33 +230,13 @@ if page == 'Market Overview':
         pop_filtered['sum'] = pop_filtered[genre_chosen].sum(axis = 1)
         filtered = pop_filtered[pop_filtered['sum'] >=1][0:5]
         fig, ax = plt.subplots(figsize=(15,7))
-
         sns.barplot(x=filtered['popularity'][0:5], y=filtered['name'][0:5], width = 0.6, palette="Set2")
+        for i, v in enumerate(filtered['popularity'][0:5]):
+            ax.text(v+0.15, i, str(v), color='white', fontsize=12, ha='left', va='center')
         ax.set_xlabel('Track',fontsize = 20)
         ax.set_ylabel('Popularity',fontsize = 20)
         fig, ax = plot_config(fig, ax)
         st.pyplot(fig)
-
-    
-
-# # Top Tracks Features in Genre
-#     c4 = st.container()
-#     with c4:
-#         st.header("Top Tracks Features in Genre")
-#         col1, col2, col3 = st.columns([4,1,6])
-#         with col1:
-#             genre_option = st.selectbox('Choose a genre', genres)
-#             genre_feature_option = st.selectbox('Choose a feature', ('Popularity','Danceability', 'Energy', 'Loudness', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence','Tempo', 'Duration_ms','Available_Markets'))
-        
-#         with col3:
-#             fig, ax = plt.subplots(figsize=(18,7))
-#             filter_by_genre = track_feature_genre_df[track_feature_genre_df[genre_option] == 1]
-#             sns.barplot(y=filter_by_genre[genre_feature_option.lower()][:5], x=filter_by_genre['name'][:5].apply(lambda x: x[:40]), width = 0.6,palette="Set2")
-#             ax.set_title(genre_feature_option + ' of Top 5 Tracks in Genre ' + genre_option, fontsize = 20)
-#             ax.set_xlabel('Track',fontsize = 14)
-#             ax.set_ylabel(genre_feature_option,fontsize = 14)
-#             fig, ax = plot_config(fig, ax)
-#             st.pyplot(fig)
 
 
 
@@ -259,8 +259,11 @@ if page == 'Newly Released':
         with col3:
             st.subheader('Predictied Genre Counts')
             g = sns.catplot(y = 'Genre',kind="count",data = genre_predicted, palette="pastel")
+            values = genre_predicted['Genre'].value_counts().sort_index()
             g.set_axis_labels("Count of Tracks ", "Predicted Genre")
             fig, ax = g.fig, g.ax
+            for i, v in enumerate(values):
+                ax.text(v+0.15, i, str(v), color='white', fontsize=12, ha='left', va='center')
             fig, ax = plot_config(fig, ax)
             st.pyplot(fig)
         
@@ -307,19 +310,19 @@ if page == 'User Prediction':
             fig, ax = plt.subplots(figsize=(18,7))
             if chosen_plot == "boxplot":
                 sns.boxplot(x=target_df[chosen_feature], color="#1DB954",flierprops={'marker': 'o', 'markersize': 10, 'markerfacecolor': '#1DB954'})
-                ax.set_xlabel(chosen_feature,fontsize = 20)
-                ax.set_ylabel('Count',fontsize = 20)
+                ax.set_xlabel(chosen_feature,fontsize = 25)
+                ax.set_ylabel('count',fontsize = 25)
             else:
                 sns.histplot(target_df[chosen_feature], color="#1DB954")
-                ax.set_xlabel(chosen_feature,fontsize = 20)
-                ax.set_ylabel('Count',fontsize = 20)
+                ax.set_xlabel(chosen_feature,fontsize = 27)
+                ax.set_ylabel('count',fontsize = 27)
             fig, ax = plot_config(fig, ax)
+            ax.tick_params(axis='x', colors='white', labelsize=23)
+            ax.tick_params(axis='y', colors='white', labelsize=23)
             st.pyplot(fig)
                 
         st.markdown("---------------------------------")
-        # col1, col, col2 = st.columns([1,2,1])
-        # with col:
-        #     st.image("""https://pyxis.nymag.com/v1/imgs/3a3/b1f/2141226b8ab1ae07afe4b541ee0d2b0825-11-yic-pop-essay.rsocial.w1200.jpg""")
+        
         col1, col, col2 = st.columns([7,1,7])
         with col1:
             st.caption('Enter track related information below')
