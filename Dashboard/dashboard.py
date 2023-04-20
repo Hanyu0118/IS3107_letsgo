@@ -75,7 +75,7 @@ track_feature_genre_df = track_feature_genre_df.sort_values(by=['popularity'],as
 feature_distribution = pd.DataFrame(run_query('SELECT * FROM snappy-boulder-378707.History.FeatureDistribution'))
 #Newly Release
 popularity_diff = pd.DataFrame(run_query('''
-SELECT t1.name, t3.release_date, t1.popularity as current_popularity,
+SELECT t1.id, t1.name, t3.release_date, t1.popularity as current_popularity,
 t2.popularity as future_popularity, (t2.popularity - t1.popularity) as popularity_diff
 FROM `snappy-boulder-378707.NewReleases.NewTracks`  as t1
 inner join snappy-boulder-378707.NewReleases.PopularityPrediction as t2
@@ -94,8 +94,8 @@ features = list(feature_df.columns)
 
 #logo
 # spotify_logo = Image.open(f"{path}/spotify_logo.png")
-# spotify_logo = Image.open("../spotify_logo.png")
-spotify_logo = Image.open("D:/y3s2/IS3107_letsgo/dashboard/spotify_logo.png")
+spotify_logo = Image.open("spotify_logo.png")
+# spotify_logo = Image.open("D:/y3s2/IS3107_letsgo/dashboard/spotify_logo.png")
 color_palette = sns.color_palette("Paired").pop(2)
 
 
@@ -233,8 +233,8 @@ if page == 'Market Overview':
         sns.barplot(x=filtered['popularity'][0:5], y=filtered['name'][0:5], width = 0.6, palette="Set2")
         for i, v in enumerate(filtered['popularity'][0:5]):
             ax.text(v+0.15, i, str(v), color='white', fontsize=12, ha='left', va='center')
-        ax.set_xlabel('Track',fontsize = 20)
-        ax.set_ylabel('Popularity',fontsize = 20)
+        ax.set_xlabel('Popularity',fontsize = 20)
+        ax.set_ylabel('Track',fontsize = 20)
         fig, ax = plot_config(fig, ax)
         st.pyplot(fig)
 
@@ -283,7 +283,11 @@ if page == 'Newly Released':
         st.title("Newly Released Track Details")
         st.caption('*Top number of each column is highlighted by orange')
         cm = sns.light_palette("green", as_cmap=True)   
-        st.dataframe( popularity_diff.style.set_properties(subset=['name'], **{'width': '2px'}).background_gradient(cmap=cm, subset=['popularity_diff']).highlight_max(subset=['current_popularity','future_popularity','popularity_diff'], color='orange').set_caption('Newly Release Popularity Prediction Detail.'),
+        genre_predicted=genre_predicted.groupby('id', as_index=False).agg({'Genre':lambda x:','.join(x)})
+        popularity_diff = pd.merge(popularity_diff, genre_predicted, on="id", how="left")
+        popularity_diff.drop(['id'], axis=1, inplace=True)
+        popularity_diff = popularity_diff.rename(columns={'future_popularity': 'future_popularity_in_100_days','Genre':'predicted_genre'})
+        st.dataframe( popularity_diff.style.set_properties(subset=['name'], **{'width': '2px'}).background_gradient(cmap=cm, subset=['popularity_diff']).highlight_max(subset=['current_popularity','future_popularity_in_100_days','popularity_diff'], color='orange').set_caption('Newly Release Popularity Prediction Detail.'),
                      use_container_width=True)
 
 
@@ -295,7 +299,7 @@ if page == 'User Prediction':
     c1 = st.container()
     c2 = st.container()
     with c1:
-        st.title(':orange[Track Popularity Predictor]')
+        st.title(':orange[Feature Distribution on Genre]')
         # visual
         col1, col2, col3 = st.columns([3, 1, 7])
         with col1:
@@ -322,8 +326,9 @@ if page == 'User Prediction':
             st.pyplot(fig)
                 
         st.markdown("---------------------------------")
-        
+        st.title(':orange[Track Popularity Predictor]')
         col1, col, col2 = st.columns([7,1,7])
+        
         with col1:
             st.caption('Enter track related information below')
             released_date = st.date_input('Released Date:',datetime.datetime.now())
