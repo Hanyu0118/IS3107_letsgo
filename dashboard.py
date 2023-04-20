@@ -92,6 +92,7 @@ limit 3'''))
 genres = list(track_genre_df.columns)[1:]
 features = list(feature_df.columns)
 
+
 #logo
 spotify_logo = Image.open("spotify_logo.png")
 #spotify_logo = Image.open("spotify_logo.png")
