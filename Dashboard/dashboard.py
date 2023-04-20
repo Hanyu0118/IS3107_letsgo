@@ -93,7 +93,7 @@ genres = list(track_genre_df.columns)[1:]
 features = list(feature_df.columns)
 
 #logo
-spotify_logo = Image.open(f"{path}/spotify_logo.png")
+spotify_logo = Image.open("/app/is3107_letsgo/Dashboard/spotify_logo.png")
 #spotify_logo = Image.open("spotify_logo.png")
 # spotify_logo = Image.open("D:/y3s2/IS3107_letsgo/dashboard/spotify_logo.png")
 color_palette = sns.color_palette("Paired").pop(2)
@@ -103,7 +103,7 @@ color_palette = sns.color_palette("Paired").pop(2)
 
 st.title("SpotifyPlus")
 
-#st.sidebar.image("https://www.google.com/url?sa=i&url=https%3A%2F%2Fmartech.org%2Fspotify-launches-self-serve-platform-audio-ad-campaigns%2F&psig=AOvVaw2qxm_H7GjeKbZkTsJb6hen&ust=1682101668220000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCOir4pSLuf4CFQAAAAAdAAAAABAE", width = 150)
+st.sidebar.image(spotify_logo, width = 150)
 
 # pre-defined functions
 
