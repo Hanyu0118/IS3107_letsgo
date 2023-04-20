@@ -176,7 +176,7 @@ profanity-check==1.0.3
 prometheus-client==0.14.1
 prompt-toolkit==3.0.30
 proto-plus==1.22.2
-protobuf==3.19.1
+protobuf<4,>=3.12
 psutil==5.9.1
 ptyprocess==0.7.0
 pure-eval==0.2.2
