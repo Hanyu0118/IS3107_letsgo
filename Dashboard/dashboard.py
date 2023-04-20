@@ -103,7 +103,7 @@ color_palette = sns.color_palette("Paired").pop(2)
 
 st.title("SpotifyPlus")
 
-st.sidebar.image(spotify_logo, width = 150)
+#st.sidebar.image("https://www.google.com/url?sa=i&url=https%3A%2F%2Fmartech.org%2Fspotify-launches-self-serve-platform-audio-ad-campaigns%2F&psig=AOvVaw2qxm_H7GjeKbZkTsJb6hen&ust=1682101668220000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCOir4pSLuf4CFQAAAAAdAAAAABAE", width = 150)
 
 # pre-defined functions
 
