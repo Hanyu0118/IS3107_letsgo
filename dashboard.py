@@ -95,7 +95,7 @@ features = list(feature_df.columns)
 
 #logo
 #spotify_logo = Image.open("spotify_logo.png")
-spotify_logo = Image.open("D:/y3s2/IS3107_letsgo/spotify_logo.png")
+spotify_logo = Image.open("spotify_logo.png")
 color_palette = sns.color_palette("Paired").pop(2)
 
 
