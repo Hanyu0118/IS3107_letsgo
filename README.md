@@ -5,11 +5,12 @@ As a popular digital music streaming platform, Spotify allows artists from diffe
 Furthermore, for artists to compare their songs horizontally, Spotify should have tagged each track with genre labels. However, Spotify only attaches genre labels for artists and albums, while a genre field is not required for artists or music companies to input new tracks into the Spotify song library. This inexplicit genre labelling system is inaccurate. For instance, an album labelled by ‘K-Pop’ may contains b-side songs that are not typically K-Pop but likely to be in the ‘R&B’ genre. Also, an artist mainly composing ‘Pop’ (referring to Western Pop in the Spotify categorization system) songs may produce ‘Indie’ music from time to time to show special emotions. Therefore, Spotify will need a classification system enabling artists to identify what kind of songs others are producing in a certain genre. 
 
 ## Getting Started
+Dashboard portal: https://cocoy02-is3107-letsgo-dashboard-ly5x75.streamlit.app/
+
 This project mainly uses Jupyter Notebook. Upon cloning this repository into your local machine, run the following command to install all relevant packages.
 ```bash
 pip install -r requirements.txt
 ```
-Dashboard portal: https://
 
 ## Pipeline Instruction
 - Place all folders inside **Pipeline** into airflow/dags in you local device
