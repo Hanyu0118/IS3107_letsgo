@@ -5,7 +5,7 @@
         },
         "followers": {
             "href": null,
-            "total": 5388339
+            "total": 5392140
         },
         "genres": [
             "pop"
@@ -15,17 +15,17 @@
         "images": [
             {
                 "height": 640,
-                "url": "https://i.scdn.co/image/ab6761610000e5eb72a8e86c457085e7fdd3453f",
+                "url": "https://i.scdn.co/image/ab6761610000e5ebcf69007a4806cbac70737247",
                 "width": 640
             },
             {
                 "height": 320,
-                "url": "https://i.scdn.co/image/ab6761610000517472a8e86c457085e7fdd3453f",
+                "url": "https://i.scdn.co/image/ab67616100005174cf69007a4806cbac70737247",
                 "width": 320
             },
             {
                 "height": 160,
-                "url": "https://i.scdn.co/image/ab6761610000f17872a8e86c457085e7fdd3453f",
+                "url": "https://i.scdn.co/image/ab6761610000f178cf69007a4806cbac70737247",
                 "width": 160
             }
         ],
@@ -40,7 +40,7 @@
         },
         "followers": {
             "href": null,
-            "total": 1312816
+            "total": 1315374
         },
         "genres": [
             "alabama rap",
@@ -66,7 +66,7 @@
             }
         ],
         "name": "Yung Bleu",
-        "popularity": 68,
+        "popularity": 69,
         "type": "artist",
         "uri": "spotify:artist:3KNIG74xSTc3dj0TRy7pGX"
     },
@@ -76,7 +76,7 @@
         },
         "followers": {
             "href": null,
-            "total": 2525197
+            "total": 2529845
         },
         "genres": [
             "mandopop",
@@ -113,7 +113,7 @@
         },
         "followers": {
             "href": null,
-            "total": 422
+            "total": 434
         },
         "genres": [],
         "href": "https://api.spotify.com/v1/artists/5hFV5x9k9vxFmKFneJIVp5",
@@ -136,7 +136,7 @@
             }
         ],
         "name": "Jarrell 黄俊融",
-        "popularity": 30,
+        "popularity": 31,
         "type": "artist",
         "uri": "spotify:artist:5hFV5x9k9vxFmKFneJIVp5"
     },
@@ -146,7 +146,7 @@
         },
         "followers": {
             "href": null,
-            "total": 1484523
+            "total": 1486103
         },
         "genres": [
             "chamber pop",
@@ -186,7 +186,7 @@
         },
         "followers": {
             "href": null,
-            "total": 143278
+            "total": 143949
         },
         "genres": [
             "bedroom soul"
@@ -221,7 +221,7 @@
         },
         "followers": {
             "href": null,
-            "total": 436878
+            "total": 437422
         },
         "genres": [
             "alternative americana",
@@ -264,7 +264,7 @@
         },
         "followers": {
             "href": null,
-            "total": 41548
+            "total": 42171
         },
         "genres": [],
         "href": "https://api.spotify.com/v1/artists/3X2DdnmoANw8Rg8luHyZQb",
@@ -297,7 +297,7 @@
         },
         "followers": {
             "href": null,
-            "total": 721452
+            "total": 722925
         },
         "genres": [
             "uk alternative pop"
@@ -307,17 +307,17 @@
         "images": [
             {
                 "height": 640,
-                "url": "https://i.scdn.co/image/ab6761610000e5ebbcee82a1feb84150f5469839",
+                "url": "https://i.scdn.co/image/ab6761610000e5eba15b75a2ee429509f547c3af",
                 "width": 640
             },
             {
                 "height": 320,
-                "url": "https://i.scdn.co/image/ab67616100005174bcee82a1feb84150f5469839",
+                "url": "https://i.scdn.co/image/ab67616100005174a15b75a2ee429509f547c3af",
                 "width": 320
             },
             {
                 "height": 160,
-                "url": "https://i.scdn.co/image/ab6761610000f178bcee82a1feb84150f5469839",
+                "url": "https://i.scdn.co/image/ab6761610000f178a15b75a2ee429509f547c3af",
                 "width": 160
             }
         ],
@@ -332,7 +332,7 @@
         },
         "followers": {
             "href": null,
-            "total": 6295
+            "total": 7144
         },
         "genres": [],
         "href": "https://api.spotify.com/v1/artists/6p70iKebfMSl8zbkiEwOtS",
@@ -365,7 +365,7 @@
         },
         "followers": {
             "href": null,
-            "total": 139220
+            "total": 139463
         },
         "genres": [
             "alternative r&b",
@@ -401,7 +401,7 @@
         },
         "followers": {
             "href": null,
-            "total": 396887
+            "total": 397327
         },
         "genres": [
             "contemporary jazz",
@@ -432,7 +432,7 @@
             }
         ],
         "name": "Robert Glasper",
-        "popularity": 61,
+        "popularity": 62,
         "type": "artist",
         "uri": "spotify:artist:5cM1PvItlR21WUyBnsdMcn"
     },
@@ -442,7 +442,7 @@
         },
         "followers": {
             "href": null,
-            "total": 25835790
+            "total": 25852310
         },
         "genres": [
             "big room",
@@ -481,10 +481,9 @@
         },
         "followers": {
             "href": null,
-            "total": 10751883
+            "total": 10759913
         },
         "genres": [
-            "dance pop",
             "hel",
             "pop"
         ],
@@ -518,7 +517,7 @@
         },
         "followers": {
             "href": null,
-            "total": 544242
+            "total": 546656
         },
         "genres": [
             "new jersey underground rap",
@@ -554,11 +553,10 @@
         },
         "followers": {
             "href": null,
-            "total": 37554317
+            "total": 37581095
         },
         "genres": [
-            "electro house",
-            "pop"
+            "electro house"
         ],
         "href": "https://api.spotify.com/v1/artists/7vk5e3vY1uw9plTHJAMwjN",
         "id": "7vk5e3vY1uw9plTHJAMwjN",
@@ -590,7 +588,7 @@
         },
         "followers": {
             "href": null,
-            "total": 2525197
+            "total": 2529845
         },
         "genres": [
             "mandopop",
@@ -627,7 +625,7 @@
         },
         "followers": {
             "href": null,
-            "total": 3740631
+            "total": 3741580
         },
         "genres": [
             "edm",
@@ -664,7 +662,7 @@
         },
         "followers": {
             "href": null,
-            "total": 229269
+            "total": 229559
         },
         "genres": [
             "black americana",
@@ -702,7 +700,7 @@
         },
         "followers": {
             "href": null,
-            "total": 994666
+            "total": 994088
         },
         "genres": [
             "social media pop"
@@ -737,7 +735,7 @@
         },
         "followers": {
             "href": null,
-            "total": 544212
+            "total": 548087
         },
         "genres": [
             "alt z",
@@ -774,7 +772,7 @@
         },
         "followers": {
             "href": null,
-            "total": 1031152
+            "total": 1031345
         },
         "genres": [
             "deep underground hip hop",
@@ -812,13 +810,12 @@
         },
         "followers": {
             "href": null,
-            "total": 2569579
+            "total": 2571055
         },
         "genres": [
             "alternative r&b",
             "dance pop",
             "metropopolis",
-            "pop",
             "post-teen pop",
             "r&b",
             "urban contemporary"
@@ -853,7 +850,7 @@
         },
         "followers": {
             "href": null,
-            "total": 1306562
+            "total": 1307383
         },
         "genres": [
             "shimmer pop"
@@ -888,7 +885,7 @@
         },
         "followers": {
             "href": null,
-            "total": 369435
+            "total": 370843
         },
         "genres": [
             "alternative r&b",
@@ -916,7 +913,7 @@
             }
         ],
         "name": "Yaeji",
-        "popularity": 57,
+        "popularity": 58,
         "type": "artist",
         "uri": "spotify:artist:2RqrWplViWHSGLzlhmDcbt"
     },
@@ -926,7 +923,7 @@
         },
         "followers": {
             "href": null,
-            "total": 21861
+            "total": 22230
         },
         "genres": [],
         "href": "https://api.spotify.com/v1/artists/7qrEXiLLnWkkYHhadZ1Oij",
@@ -959,7 +956,7 @@
         },
         "followers": {
             "href": null,
-            "total": 228994
+            "total": 229240
         },
         "genres": [
             "garage rock"
@@ -984,7 +981,7 @@
             }
         ],
         "name": "Albert Hammond Jr",
-        "popularity": 50,
+        "popularity": 49,
         "type": "artist",
         "uri": "spotify:artist:1Li0eIWeMeWcOOWpImcG9H"
     },
@@ -994,7 +991,7 @@
         },
         "followers": {
             "href": null,
-            "total": 836075
+            "total": 836444
         },
         "genres": [
             "alternative r&b",
@@ -1035,7 +1032,7 @@
         },
         "followers": {
             "href": null,
-            "total": 544622
+            "total": 544400
         },
         "genres": [],
         "href": "https://api.spotify.com/v1/artists/4l1q0z9xeJcJw73Gxc6gCB",
@@ -1068,7 +1065,7 @@
         },
         "followers": {
             "href": null,
-            "total": 2525197
+            "total": 2529845
         },
         "genres": [
             "mandopop",
@@ -1105,7 +1102,7 @@
         },
         "followers": {
             "href": null,
-            "total": 1298
+            "total": 1302
         },
         "genres": [
             "singaporean mandopop"
@@ -1140,10 +1137,9 @@
         },
         "followers": {
             "href": null,
-            "total": 8335626
+            "total": 8338055
         },
         "genres": [
-            "dance pop",
             "edm",
             "pop",
             "pop dance",
@@ -1179,10 +1175,9 @@
         },
         "followers": {
             "href": null,
-            "total": 19961288
+            "total": 19985411
         },
         "genres": [
-            "dance pop",
             "pop",
             "viral pop"
         ],
@@ -1216,7 +1211,7 @@
         },
         "followers": {
             "href": null,
-            "total": 2907133
+            "total": 2909848
         },
         "genres": [
             "contemporary country",
@@ -1253,7 +1248,7 @@
         },
         "followers": {
             "href": null,
-            "total": 864373
+            "total": 865469
         },
         "genres": [
             "indie soul",
@@ -1290,7 +1285,7 @@
         },
         "followers": {
             "href": null,
-            "total": 134129
+            "total": 134339
         },
         "genres": [
             "underground hip hop"
@@ -1325,7 +1320,7 @@
         },
         "followers": {
             "href": null,
-            "total": 542868
+            "total": 543027
         },
         "genres": [
             "indonesian pop"
@@ -1360,7 +1355,7 @@
         },
         "followers": {
             "href": null,
-            "total": 96515
+            "total": 96526
         },
         "genres": [
             "pop dance",
@@ -1396,7 +1391,7 @@
         },
         "followers": {
             "href": null,
-            "total": 1164
+            "total": 1168
         },
         "genres": [],
         "href": "https://api.spotify.com/v1/artists/0ygjYRcmPUdSwSnN47xq8F",
@@ -1419,7 +1414,7 @@
             }
         ],
         "name": "ZHANG YANQI",
-        "popularity": 39,
+        "popularity": 40,
         "type": "artist",
         "uri": "spotify:artist:0ygjYRcmPUdSwSnN47xq8F"
     },
@@ -1429,7 +1424,7 @@
         },
         "followers": {
             "href": null,
-            "total": 122522
+            "total": 122679
         },
         "genres": [
             "indonesian folk",
@@ -1465,7 +1460,7 @@
         },
         "followers": {
             "href": null,
-            "total": 73474
+            "total": 73506
         },
         "genres": [
             "bergen indie",
@@ -1501,7 +1496,7 @@
         },
         "followers": {
             "href": null,
-            "total": 1941
+            "total": 1960
         },
         "genres": [
             "taiwan indie"
@@ -1536,7 +1531,7 @@
         },
         "followers": {
             "href": null,
-            "total": 11848652
+            "total": 11858608
         },
         "genres": [
             "dance pop",
@@ -1575,7 +1570,7 @@
         },
         "followers": {
             "href": null,
-            "total": 22708371
+            "total": 22795632
         },
         "genres": [
             "art pop",
@@ -1611,12 +1606,10 @@
         },
         "followers": {
             "href": null,
-            "total": 8553169
+            "total": 8559698
         },
         "genres": [
-            "dance pop",
-            "pop",
-            "post-teen pop"
+            "pop"
         ],
         "href": "https://api.spotify.com/v1/artists/5p7f24Rk5HkUZsaS3BLG5F",
         "id": "5p7f24Rk5HkUZsaS3BLG5F",
@@ -1648,7 +1641,7 @@
         },
         "followers": {
             "href": null,
-            "total": 9942761
+            "total": 9950490
         },
         "genres": [
             "emo",
@@ -1687,7 +1680,7 @@
         },
         "followers": {
             "href": null,
-            "total": 1375169
+            "total": 1376283
         },
         "genres": [
             "edm",
@@ -1724,7 +1717,7 @@
         },
         "followers": {
             "href": null,
-            "total": 2107893
+            "total": 2126365
         },
         "genres": [
             "modern indie pop"
@@ -1759,7 +1752,7 @@
         },
         "followers": {
             "href": null,
-            "total": 279615
+            "total": 280743
         },
         "genres": [
             "electropop"
@@ -1784,7 +1777,7 @@
             }
         ],
         "name": "Jai Wolf",
-        "popularity": 56,
+        "popularity": 55,
         "type": "artist",
         "uri": "spotify:artist:24V5UY0nChKpnb1TBPJhCw"
     },
@@ -1794,7 +1787,7 @@
         },
         "followers": {
             "href": null,
-            "total": 86628
+            "total": 86811
         },
         "genres": [
             "alt z",
@@ -1830,7 +1823,7 @@
         },
         "followers": {
             "href": null,
-            "total": 311683
+            "total": 313125
         },
         "genres": [],
         "href": "https://api.spotify.com/v1/artists/73BLwSX6gsNeVzS7DgI4xe",
@@ -1863,7 +1856,7 @@
         },
         "followers": {
             "href": null,
-            "total": 343445
+            "total": 343944
         },
         "genres": [
             "uk pop"
@@ -1898,7 +1891,7 @@
         },
         "followers": {
             "href": null,
-            "total": 59182
+            "total": 59316
         },
         "genres": [
             "chill pop"
@@ -1923,7 +1916,7 @@
             }
         ],
         "name": "DWLLRS",
-        "popularity": 52,
+        "popularity": 51,
         "type": "artist",
         "uri": "spotify:artist:2TviQllPVEQ7E68Yr4uPKR"
     },
@@ -1933,7 +1926,7 @@
         },
         "followers": {
             "href": null,
-            "total": 28646913
+            "total": 28698520
         },
         "genres": [
             "chicago rap",
@@ -1970,7 +1963,7 @@
         },
         "followers": {
             "href": null,
-            "total": 42296
+            "total": 42621
         },
         "genres": [
             "norwegian pop"
@@ -2005,7 +1998,7 @@
         },
         "followers": {
             "href": null,
-            "total": 1158873
+            "total": 1159556
         },
         "genres": [
             "sad lo-fi",
@@ -2041,7 +2034,7 @@
         },
         "followers": {
             "href": null,
-            "total": 5335442
+            "total": 5343561
         },
         "genres": [
             "dance rock",
@@ -2080,7 +2073,7 @@
         },
         "followers": {
             "href": null,
-            "total": 251986
+            "total": 253474
         },
         "genres": [
             "hyperpop"
@@ -2115,7 +2108,7 @@
         },
         "followers": {
             "href": null,
-            "total": 672721
+            "total": 674115
         },
         "genres": [
             "alternative r&b"
@@ -2150,7 +2143,7 @@
         },
         "followers": {
             "href": null,
-            "total": 521825
+            "total": 522762
         },
         "genres": [
             "alternative r&b",
@@ -2186,7 +2179,7 @@
         },
         "followers": {
             "href": null,
-            "total": 172437
+            "total": 172935
         },
         "genres": [
             "indonesian pop",
@@ -2213,7 +2206,7 @@
             }
         ],
         "name": "Rahmania Astrini",
-        "popularity": 46,
+        "popularity": 45,
         "type": "artist",
         "uri": "spotify:artist:0e5blBgpur3Y18wS1bzXQC"
     },
@@ -2223,7 +2216,7 @@
         },
         "followers": {
             "href": null,
-            "total": 16072
+            "total": 16114
         },
         "genres": [
             "malaysian indie"
@@ -2258,7 +2251,7 @@
         },
         "followers": {
             "href": null,
-            "total": 1524
+            "total": 1532
         },
         "genres": [],
         "href": "https://api.spotify.com/v1/artists/2PSBYmtNWEm9f8VOSCFFX0",
@@ -2291,7 +2284,7 @@
         },
         "followers": {
             "href": null,
-            "total": 2107893
+            "total": 2126365
         },
         "genres": [
             "modern indie pop"
@@ -2326,7 +2319,7 @@
         },
         "followers": {
             "href": null,
-            "total": 679759
+            "total": 684837
         },
         "genres": [
             "edm",
@@ -2352,7 +2345,7 @@
             }
         ],
         "name": "Fred again..",
-        "popularity": 78,
+        "popularity": 77,
         "type": "artist",
         "uri": "spotify:artist:4oLeXFyACqeem2VImYeBFe"
     },
@@ -2362,7 +2355,7 @@
         },
         "followers": {
             "href": null,
-            "total": 8154464
+            "total": 8156430
         },
         "genres": [
             "brostep",
@@ -2401,7 +2394,7 @@
         },
         "followers": {
             "href": null,
-            "total": 640175
+            "total": 640767
         },
         "genres": [
             "electronica",

@@ -237,7 +237,7 @@
         ],
         "label": "Atlantic Records",
         "name": "Eyes",
-        "popularity": 52,
+        "popularity": 54,
         "release_date": "2023-04-14",
         "release_date_precision": "day",
         "total_tracks": 1,
@@ -706,7 +706,7 @@
         ],
         "label": "Moon Boy University / EMPIRE",
         "name": "Love Scars II",
-        "popularity": 61,
+        "popularity": 64,
         "release_date": "2023-04-14",
         "release_date_precision": "day",
         "total_tracks": 15,
@@ -4202,7 +4202,7 @@
         ],
         "label": "就是俊傑音樂股份有限公司",
         "name": "願與愁",
-        "popularity": 44,
+        "popularity": 48,
         "release_date": "2023-04-14",
         "release_date_precision": "day",
         "total_tracks": 1,
@@ -4671,7 +4671,7 @@
         ],
         "label": "Universal Music Pte. Ltd.",
         "name": "太阳与地球",
-        "popularity": 23,
+        "popularity": 29,
         "release_date": "2023-04-14",
         "release_date_precision": "day",
         "total_tracks": 1,
@@ -5140,7 +5140,7 @@
         ],
         "label": "4AD",
         "name": "Your Mind Is Not Your Friend (feat. Phoebe Bridgers)",
-        "popularity": 54,
+        "popularity": 57,
         "release_date": "2023-04-12",
         "release_date_precision": "day",
         "total_tracks": 1,
@@ -5620,7 +5620,7 @@
         ],
         "label": "Harbour Artists & Music",
         "name": "Drunk On A Flight",
-        "popularity": 50,
+        "popularity": 54,
         "release_date": "2023-04-14",
         "release_date_precision": "day",
         "total_tracks": 12,
@@ -8444,7 +8444,7 @@
         ],
         "label": "Jagjaguwar",
         "name": "Forever Means",
-        "popularity": 42,
+        "popularity": 45,
         "release_date": "2023-04-14",
         "release_date_precision": "day",
         "total_tracks": 4,
@@ -9556,7 +9556,7 @@
         ],
         "label": "Young",
         "name": "Enjoy Your Life",
-        "popularity": 49,
+        "popularity": 52,
         "release_date": "2023-04-11",
         "release_date_precision": "day",
         "total_tracks": 2,
@@ -10247,7 +10247,7 @@
         ],
         "label": "XL Recordings",
         "name": "Seaforth",
-        "popularity": 47,
+        "popularity": 50,
         "release_date": "2023-04-13",
         "release_date_precision": "day",
         "total_tracks": 1,
@@ -10734,7 +10734,7 @@
         ],
         "label": "Sounds of Crenshaw / EMPIRE",
         "name": "Enigmatic Society",
-        "popularity": 48,
+        "popularity": 51,
         "release_date": "2023-04-14",
         "release_date_precision": "day",
         "total_tracks": 9,
@@ -11263,6 +11263,16 @@
                     "artists": [
                         {
                             "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/6p70iKebfMSl8zbkiEwOtS"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/6p70iKebfMSl8zbkiEwOtS",
+                            "id": "6p70iKebfMSl8zbkiEwOtS",
+                            "name": "Dinner Party",
+                            "type": "artist",
+                            "uri": "spotify:artist:6p70iKebfMSl8zbkiEwOtS"
+                        },
+                        {
+                            "external_urls": {
                                 "spotify": "https://open.spotify.com/artist/7MNEVabc4cs19CbzAFZmXz"
                             },
                             "href": "https://api.spotify.com/v1/artists/7MNEVabc4cs19CbzAFZmXz",
@@ -11751,6 +11761,16 @@
                     "artists": [
                         {
                             "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/6p70iKebfMSl8zbkiEwOtS"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/6p70iKebfMSl8zbkiEwOtS",
+                            "id": "6p70iKebfMSl8zbkiEwOtS",
+                            "name": "Dinner Party",
+                            "type": "artist",
+                            "uri": "spotify:artist:6p70iKebfMSl8zbkiEwOtS"
+                        },
+                        {
+                            "external_urls": {
                                 "spotify": "https://open.spotify.com/artist/7MNEVabc4cs19CbzAFZmXz"
                             },
                             "href": "https://api.spotify.com/v1/artists/7MNEVabc4cs19CbzAFZmXz",
@@ -11781,16 +11801,6 @@
                         },
                         {
                             "external_urls": {
-                                "spotify": "https://open.spotify.com/artist/6TvjXbopXg71XRM9OZWqUc"
-                            },
-                            "href": "https://api.spotify.com/v1/artists/6TvjXbopXg71XRM9OZWqUc",
-                            "id": "6TvjXbopXg71XRM9OZWqUc",
-                            "name": "Arin Ray",
-                            "type": "artist",
-                            "uri": "spotify:artist:6TvjXbopXg71XRM9OZWqUc"
-                        },
-                        {
-                            "external_urls": {
                                 "spotify": "https://open.spotify.com/artist/4s8ZGMVf3OiPktSP4ulpqU"
                             },
                             "href": "https://api.spotify.com/v1/artists/4s8ZGMVf3OiPktSP4ulpqU",
@@ -11798,6 +11808,16 @@
                             "name": "9th Wonder",
                             "type": "artist",
                             "uri": "spotify:artist:4s8ZGMVf3OiPktSP4ulpqU"
+                        },
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/6TvjXbopXg71XRM9OZWqUc"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/6TvjXbopXg71XRM9OZWqUc",
+                            "id": "6TvjXbopXg71XRM9OZWqUc",
+                            "name": "Arin Ray",
+                            "type": "artist",
+                            "uri": "spotify:artist:6TvjXbopXg71XRM9OZWqUc"
                         }
                     ],
                     "available_markets": [
@@ -11995,7 +12015,7 @@
                     "href": "https://api.spotify.com/v1/tracks/39RJfDkli3BkEsW6LN4DrZ",
                     "id": "39RJfDkli3BkEsW6LN4DrZ",
                     "is_local": false,
-                    "name": "For Granted (feat. Arin Ray & 9th Wonder)",
+                    "name": "For Granted (feat. Arin Ray)",
                     "preview_url": "https://p.scdn.co/mp3-preview/48c62e655683d9a685faa859c53c881875fbb9d3?cid=70b6029251944c06b7f4b7b9339a8f86",
                     "track_number": 5,
                     "type": "track",
@@ -13295,7 +13315,7 @@
         ],
         "label": "Parlophone UK",
         "name": "Baby Don't Hurt Me",
-        "popularity": 74,
+        "popularity": 75,
         "release_date": "2023-04-06",
         "release_date_precision": "day",
         "total_tracks": 2,
@@ -14487,7 +14507,7 @@
         ],
         "label": "就是俊傑音樂股份有限公司",
         "name": "In The Joy (feat. Anderson .Paak)",
-        "popularity": 50,
+        "popularity": 49,
         "release_date": "2023-04-07",
         "release_date_precision": "day",
         "total_tracks": 1,
@@ -15477,7 +15497,7 @@
         ],
         "label": "Harbour Artists & Music",
         "name": "Spotify Singles",
-        "popularity": 60,
+        "popularity": 61,
         "release_date": "2023-04-05",
         "release_date_precision": "day",
         "total_tracks": 2,
@@ -16648,7 +16668,7 @@
         ],
         "label": "4AD",
         "name": "Stereo Mind Game",
-        "popularity": 61,
+        "popularity": 62,
         "release_date": "2023-04-07",
         "release_date_precision": "day",
         "total_tracks": 12,
@@ -19436,7 +19456,7 @@
         ],
         "label": "XL Recordings",
         "name": "Passed Me By",
-        "popularity": 45,
+        "popularity": 44,
         "release_date": "2023-04-04",
         "release_date_precision": "day",
         "total_tracks": 3,
@@ -20255,7 +20275,7 @@
         ],
         "label": "Partisan Records",
         "name": "Blondshell",
-        "popularity": 45,
+        "popularity": 46,
         "release_date": "2023-04-07",
         "release_date_precision": "day",
         "total_tracks": 9,
@@ -22686,7 +22706,7 @@
         ],
         "label": "就是俊傑音樂股份有限公司",
         "name": "謝幕",
-        "popularity": 54,
+        "popularity": 55,
         "release_date": "2023-03-25",
         "release_date_precision": "day",
         "total_tracks": 1,
@@ -25407,7 +25427,7 @@
         ],
         "label": "Atlantic Records",
         "name": "That’s Not How This Works (feat. Dan + Shay)",
-        "popularity": 73,
+        "popularity": 74,
         "release_date": "2023-03-31",
         "release_date_precision": "day",
         "total_tracks": 1,
@@ -25896,7 +25916,7 @@
         ],
         "label": "Caiola Records",
         "name": "Candle Flame",
-        "popularity": 63,
+        "popularity": 64,
         "release_date": "2023-03-27",
         "release_date_precision": "day",
         "total_tracks": 1,
@@ -44512,7 +44532,7 @@
         ],
         "label": "Columbia",
         "name": "crow's nest",
-        "popularity": 48,
+        "popularity": 47,
         "release_date": "2023-03-24",
         "release_date_precision": "day",
         "total_tracks": 3,
@@ -51175,7 +51195,7 @@
         ],
         "label": "Breaking Music Sdn. Bhd.",
         "name": "midnight rendezvous",
-        "popularity": 40,
+        "popularity": 39,
         "release_date": "2023-03-24",
         "release_date_precision": "day",
         "total_tracks": 1,
@@ -53442,7 +53462,7 @@
         ],
         "label": "Atlantic Records UK",
         "name": "Baby again..",
-        "popularity": 69,
+        "popularity": 68,
         "release_date": "2023-03-17",
         "release_date_precision": "day",
         "total_tracks": 1,

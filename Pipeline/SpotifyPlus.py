@@ -1,4 +1,5 @@
 # [START import_module]
+import pendulum
 from datetime import datetime
 from datetime import timedelta
 from textwrap import dedent
@@ -17,20 +18,20 @@ from airflow.operators.python import PythonOperator
 # sys.path.insert(1, "../is3107")
 # print(sys.path)
 
-from is3107.truncate_newly_release import truncate_newly_release_op                 #Task0
-from is3107.extract_new_releases import extract_new_releases_op                     #Task1 checked
-from is3107.clean_new_albums import clean_new_albums_op                             #Task2 checked
-from is3107.load_new_albums import load_new_albums_op                               #Task3 checked
-from is3107.extract_new_albums_full_info import extract_new_albums_full_info_op     #Task4 checked
-from is3107.extract_artist import extract_artist_op                                 #Task5 checked
-from is3107.get_new_track_ids import get_new_track_ids_op                           #Task6 checked
-from is3107.extract_new_track_info import extract_new_track_info_op                 #Task7 checked
-from is3107.extract_audio_features import extract_audio_features_op                 #Task8 checked
-from is3107.clean_new_track_info import clean_new_track_info_op                     #Task9 checked
+# from is3107.truncate_new_releases import truncate_new_releases_op                     #Task0
+from is3107.extract_new_releases import extract_new_releases_op                     #Task1
+from is3107.clean_new_albums import clean_new_albums_op                             #Task2
+from is3107.load_new_albums import load_new_albums_op                               #Task3
+from is3107.extract_new_albums_full_info import extract_new_albums_full_info_op     #Task4
+from is3107.extract_artist import extract_artist_op                                 #Task5
+from is3107.get_new_track_ids import get_new_track_ids_op                           #Task6
+from is3107.extract_new_track_info import extract_new_track_info_op                 #Task7
+from is3107.extract_audio_features import extract_audio_features_op                 #Task8
+from is3107.clean_new_track_info import clean_new_track_info_op                     #Task9
 from is3107.load_new_track_info import load_new_track_info_op                       #Task10
-from is3107.clean_audio_features import clean_audio_features_op                     #Task11 checked
-from is3107.load_audio_features import load_audio_features_op                       #Task12 checked
-from is3107.clean_artist import clean_artist_op                                     #Task13 checked
+from is3107.clean_audio_features import clean_audio_features_op                     #Task11
+from is3107.load_audio_features import load_audio_features_op                       #Task12
+from is3107.clean_artist import clean_artist_op                                     #Task13
 from is3107.load_artist import load_artist_op                                       #Task14
 
 from is3107.dump_album import dump_album_op                                         #Task15
@@ -38,7 +39,7 @@ from is3107.dump_track_info import dump_trackinfo_op                            
 from is3107.dump_audio_features import dump_audiofeatures_op                        #Task17
 from is3107.dump_artist import dump_artist_op                                       #Task18
 
-from is3107.prediction_newly_release import prediction_newly_release_op             #Task19
+from is3107.predict_new_releases import predict_new_releases_op                     #Task19
 from is3107.update_feature_distribution import update_feature_distribution_op       #Task20
 import os
 path = os.getcwd()
@@ -57,13 +58,14 @@ with DAG(
         'email_on_failure': False,
         'email_on_retry': False,
         'retries': 5,
-        'retry_delay': timedelta(seconds=5),
+        'retry_delay': timedelta(seconds=20),
 
     },
     # [END default_args]
-    description='SpotifyPlus ETL',
-    schedule_interval=None,
-    start_date=datetime(2023, 3, 21),
+    description='SpotifyPlus ETLT',
+    schedule_interval='@weekly',
+    #schedule_interval=None,
+    start_date=pendulum.datetime(2023, 3, 21, tz="UTC"),
     catchup=False,
     tags=['is3107_project'],
 ) as dag:
@@ -76,12 +78,12 @@ with DAG(
     """  # otherwise, type it like this
     # [END documentation]
 
-    # [START truncate newly release]
-    def truncate_new_releases(**kwargs):
-        ti = kwargs['ti']
-        truncate_newly_release_op()
-        print("NEWLY RELEASE DELETED")
-    # [END truncate newly release]
+    # # [START truncate newly release]
+    # def truncate_new_releases(**kwargs):
+    #     ti = kwargs['ti']
+    #     truncate_new_releases_op()
+    #     print("NEW RELEASE DELETED")
+    # # [END truncate newly release]
 
     # [START extract_new_releases]
     def extract_new_releases(**kwargs):
@@ -273,9 +275,9 @@ with DAG(
     # [END  dump_album]
     
     # [START prediction]
-    def prediction_newly_release(**kwargs):
+    def predict_new_releases(**kwargs):
         ti = kwargs['ti']
-        prediction_newly_release_op()
+        predict_new_releases_op()
         print("PREDICTION DONE")
     # [END prediction]
 
@@ -288,13 +290,13 @@ with DAG(
 
     # [START main_flow]
 
-    Task0 = PythonOperator(
-        task_id='truncate_new_releases',
-        python_callable=truncate_new_releases,
-    )
-    Task0.doc_md = dedent(
-        ''''''
-    )
+    # Task0 = PythonOperator(
+    #     task_id='truncate_new_releases',
+    #     python_callable=truncate_new_releases,
+    # )
+    # Task0.doc_md = dedent(
+    #     ''''''
+    # )
 
     Task1 = PythonOperator(
         task_id='extract_new_releases',
@@ -332,6 +334,7 @@ with DAG(
     Task5 = PythonOperator(
         task_id='extract_artist',
         python_callable=extract_artist,
+        execution_timeout=timedelta(seconds=30),
     )
     Task5.doc_md = dedent(
         ''''''
@@ -348,6 +351,7 @@ with DAG(
     Task7 = PythonOperator(
         task_id='extract_new_track_info',
         python_callable=extract_new_track_info,
+        execution_timeout=timedelta(seconds=30),
     )
     Task7.doc_md = dedent(
         ''''''
@@ -443,8 +447,8 @@ with DAG(
 
      
     Task19 = PythonOperator(
-        task_id='prediction_newly_release',
-        python_callable=prediction_newly_release,
+        task_id='predict_new_releases',
+        python_callable=predict_new_releases,
     )
     Task19.doc_md = dedent(
         ''''''
@@ -459,7 +463,7 @@ with DAG(
         ''''''
     )
 
-    Task0 >> Task1 >> Task2 >> [Task3, Task4, Task5]
+    Task1 >> Task2 >> [Task3, Task4, Task5]
     Task3 >> Task15
     Task4 >> Task6 >> [Task7, Task8]
 
